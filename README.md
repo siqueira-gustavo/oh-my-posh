@@ -1,11 +1,11 @@
-# Oh My Posh
+# PowerShell setup (Windows)
 
-## # Tema personalizado
+## # Tema personalizado - Oh My Posh
 
 <!-- TOC -->
 
-- [Oh My Posh](#oh-my-posh)
-    - [# Tema personalizado](#-tema-personalizado)
+- [PowerShell setup Windows](#powershell-setup-windows)
+    - [# Tema personalizado - Oh My Posh](#-tema-personalizado---oh-my-posh)
     - [Informações gerais](#informa%C3%A7%C3%B5es-gerais)
     - [Tecnologias utilizadas](#tecnologias-utilizadas)
     - [Como customizar o tema do Oh My Posh](#como-customizar-o-tema-do-oh-my-posh)
@@ -16,17 +16,25 @@
 
 ## Informações gerais
 
-Criar uma tela de cadastro e consulta de séries no terminal (console). Os dados serão perdidos após fechar o programa.
+Minhas configurações e tecnologias para utilização do Windows Terminal com o PowerShell.
+
+**Aviso:** Essas são as minhas configurações pessoais. Apenas utilize essas configurações caso saiba em que isso implica. Consulte os manuais através dos links citados.
 
 ## Tecnologias utilizadas
 
-- Powershell
-- Windows Terminal
-- Oh My Posh
-- Z
-- Terminal-Icons
-- Fzf
-- Vim
+- [Powershell](https://github.com/PowerShell/PowerShell)
+- [Windows Terminal](https://github.com/microsoft/terminal)
+- [Oh My Posh](https://ohmyposh.dev/)
+- [Z](https://www.powershellgallery.com/packages/z/1.1.13)
+- [Terminal-Icons](https://github.com/devblackops/Terminal-Icons)
+- [PSFzf](https://github.com/kelleyma49/PSFzf)
+- [PSReadLine](https://docs.microsoft.com/en-us/powershell/module/psreadline/?view=powershell-7.2)
+- [Git for Windows](https://gitforwindows.org/)
+- [Nvim](https://github.com/neovim/neovim)
+- [Scoop](https://scoop.sh/)
+- [Chocolatey](https://chocolatey.org/)
+- [Winget](https://docs.microsoft.com/pt-br/windows/package-manager/winget/)
+- [Wget](https://www.gnu.org/software/wget/)
 
 ## Como customizar o tema do Oh My Posh
 
@@ -34,7 +42,11 @@ As informações de customização do tema do Oh My Posh podem ser encontradas n
 
 https://ohmyposh.dev/docs/config-overview
 
-Ou poderá clonar os arquivos de configuração na pasta ```\.config\powershell```
+Ou poderá clonar os arquivos de configuração na pasta ```\.config\powershell``` e utilizar como referência.
+
+Outra referência muito boa pode ser encontrada em:
+
+https://www.youtube.com/watch?v=5-aK2_WwrmM
 
 ## Captura de tela
 
