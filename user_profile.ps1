@@ -78,7 +78,7 @@ function gpom { git push -u origin main }
 function gpo { git push origin }
 function gpl { git pull origin }
 function gd { git diff }
-function gc { git commit -m "$1" }
+function gic { git commit -m "$1" }
 function gca { git commit -am "$1" }
 function gco { git checkout "$1" }
 function gb { git branch }
