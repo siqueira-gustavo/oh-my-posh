@@ -50,9 +50,23 @@ function which ($command) {
     Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue
 }
 
-function codar { cd 'D:\Users\guss_\Documents\CODE' }
+function openGitHub {
+  $url = "https://github.com/siqueira-gustavo"
+  $browser = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+  if ($url -eq $null) {
+    return
+  }
+  # Open URL in default browser
+  if ($browser) {
+    Start-Process -FilePath $browser -ArgumentList $url
+  } else {
+    Start-Process -FilePath "chrome" -ArgumentList $url
+  }
+}
 
+function codar { cd 'D:\Users\guss_\Documents\CODE' }
 function pwsh-config { cd 'C:\Users\guss_\.config\powershell' }
+function pwsh-code { code 'C:\Users\guss_\.config\powershell' }
 
 # git aliases
 function gi { git init }
