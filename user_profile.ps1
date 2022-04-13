@@ -26,16 +26,51 @@ Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory
 $env:GIT_SSH = "C:\Windows\system32\OpenSSH\ssh.exe"
 
 # Alias
+Set-Alias eth Get-NetAdapter
 Set-Alias vim nvim
 Set-Alias ll ls
 Set-Alias g git
 Set-Alias grep findstr
+Set-Alias sed 'C:\Program Files\Git\usr\bin\sed.exe'
 Set-Alias tig 'C:\Program Files\Git\usr\bin\tig.exe'
 Set-Alias less 'C:\Program Files\Git\usr\bin\less.exe'
 
 # Utilities
+function update { 
+  sudo choco upgrade all &&
+  scoop update * && 
+  winget upgrade --all && 
+  Update-Module -Name oh-my-posh -Scope CurrentUser
+}
+
+function weather { curl wttr.in/Lauro_de_Freitas?lang=pt }
+
 function which ($command) {
   Get-Command -Name $command -ErrorAction SilentlyContinue |
     Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue
 }
 
+function codar { cd 'D:\Users\guss_\Documents\CODE' }
+
+function pwsh-config { cd 'C:\Users\guss_\.config\powershell' }
+
+# git aliases
+function gi { git init }
+function ga { git add . }
+function gs { git status }
+function gp { git pull }
+function gpsh { git push }
+function gpom { git push -u origin main }
+function gpo { git push origin }
+function gpl { git pull origin }
+function gd { git diff }
+function gc { git commit -m "$1" }
+function gca { git commit -am "$1" }
+function gco { git checkout "$1" }
+function gb { git branch }
+function gba { git branch -a }
+function gbD { git branch -D "$1" }
+function gbR { git branch -m "$1" }
+function gbM { git branch -m "$1" "$2" }
+function gbA { git branch -a -D "$1" }
+function gbl { git branch -a | grep -v '\*' | sed 's/^..//' }

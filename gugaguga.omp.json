@@ -7,27 +7,25 @@
         {
           "foreground": "#26C6DA",
           "properties": {
-            "macos": "mac",
-            "template": "{{ if .WSL }}WSL at {{ end }}{{.Icon}}"
+            "macos": "mac"
           },
           "style": "plain",
+          "template": "{{ if .WSL }}WSL at {{ end }}{{.Icon}}",
           "type": "os"
         },
         {
           "foreground": "lightGreen",
-          "properties": {
-            "template": " {{ .HostName }} <#ffffff>in</> "
-          },
           "style": "plain",
+          "template": " {{ .HostName }} <#ffffff>in</> ",
           "type": "session"
         },
         {
           "foreground": "yellow",
           "properties": {
-            "style": "folder",
-            "template": "<#26C6DA>\ufc6e </>/{{ .Path }} "
+            "style": "folder"
           },
           "style": "plain",
+          "template": "<#26C6DA>\ufc6e </>/{{ .Path }} ",
           "type": "path"
         },
         {
@@ -35,18 +33,16 @@
           "properties": {
             "fetch_stash_count": true,
             "fetch_status": true,
-            "fetch_upstream_icon": true,
-            "template": "<#ffffff>on</> {{ .UpstreamIcon }}{{ .HEAD }}{{ .BranchStatus }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if gt .StashCount 0 }} \uf692 {{ .StashCount }}{{ end }} "
+            "fetch_upstream_icon": true
           },
           "style": "plain",
+          "template": "<#ffffff>on</> {{ .UpstreamIcon }}{{ .HEAD }}{{ .BranchStatus }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if gt .StashCount 0 }} \uf692 {{ .StashCount }}{{ end }} ",
           "type": "git"
         },
         {
           "foreground": "#FFD54F",
-          "properties": {
-            "template": "<#CB4B16>\u276f</><#CACA02>\u276f</><#4E9A06>\u276f</> "
-          },
           "style": "plain",
+          "template": "<#CB4B16>\u276f</><#CACA02>\u276f</><#4E9A06>\u276f</> ",
           "type": "text"
         }
       ],
@@ -60,39 +56,39 @@
           "foreground": "#7650e7",
           "properties": {
             "display_mode": "files",
-            "fetch_virtual_env": false,
-            "template": "[\ue235 {{ .Full }}]"
+            "fetch_virtual_env": false
           },
           "style": "powerline",
+          "template": "[\ue235 {{ .Full }}]",
           "type": "python"
         },
         {
           "foreground": "#7FD5EA",
           "properties": {
-            "fetch_version": true,
-            "template": "[\ufcd1 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}]"
+            "fetch_version": true
           },
           "style": "powerline",
+          "template": "[\ufcd1 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}]",
           "type": "go"
         },
         {
           "background": "#76b367",
           "foreground": "#1c4711",
           "properties": {
-            "fetch_version": true,
-            "template": "[\ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}]"
+            "fetch_version": true
           },
           "style": "powerline",
+          "template": "[\ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}]",
           "type": "node"
         },
         {
           "background": "#db9f9f",
           "foreground": "#ea2d2e",
           "properties": {
-            "fetch_version": true,
-            "template": "[\ue738 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}]"
+            "fetch_version": true
           },
           "style": "powerline",
+          "template": "[\ue738 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}]",
           "type": "java"
         },
         {
@@ -102,10 +98,10 @@
           ],
           "foreground": "#ffffff",
           "properties": {
-            "display_default": false,
-            "template": "[\ue7ad {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }}]"
+            "display_default": false
           },
           "style": "powerline",
+          "template": "[\ue7ad {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }}]",
           "type": "aws"
         },
         {
@@ -113,10 +109,10 @@
           "foreground": "#000000",
           "invert_powerline": true,
           "properties": {
-            "always_enabled": true,
-            "template": " {{ .FormattedMs }} \uf252 "
+            "always_enabled": true
           },
           "style": "plain",
+          "template": " {{ .FormattedMs }} \uf252 ",
           "type": "executiontime"
         },
         {
@@ -124,10 +120,10 @@
           "foreground": "#000000",
           "invert_powerline": true,
           "properties": {
-            "template": " {{ .CurrentDate | date .Format }} \uf017 ",
             "time_format": "15:04:05"
           },
           "style": "plain",
+          "template": " {{ .CurrentDate | date .Format }} \uf017 ",
           "type": "time"
         },
         {
@@ -141,10 +137,10 @@
           "properties": {
             "charged_icon": "\uf1e6 ",
             "charging_icon": "\ue234 ",
-            "discharging_icon": "\ue231 ",
-            "template": " {{ if not .Error }}{{.Icon}}{{.Percentage}}%{{ end }} \uf583 "
+            "discharging_icon": "\ue231 "
           },
           "style": "diamond",
+          "template": " {{ if not .Error }}{{.Icon}}{{.Percentage}}%{{ end }} \uf583 ",
           "trailing_diamond": "\ue0b4",
           "type": "battery"
         }
@@ -152,8 +148,6 @@
       "type": "rprompt"
     }
   ],
-  "console_title": true,
-  "console_title_style": "template",
   "console_title_template": "{{.Host}} in {{.Folder}}",
-  "version": 1
+  "version": 2
 }
