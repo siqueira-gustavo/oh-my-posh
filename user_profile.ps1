@@ -79,9 +79,9 @@ function gpom { git push -u origin main }
 function gpo { git push origin }
 function gpl { git pull origin }
 function gd { git diff }
-function gic { git commit -m "$1" }
+function gco { git commit -m "$1" }
 function gca { git commit -am "$1" }
-function gco { git checkout "$1" }
+function gcout { git checkout "$1" }
 function gb { git branch }
 function gba { git branch -a }
 function gbD { git branch -D "$1" }
@@ -90,3 +90,50 @@ function gbM { git branch -m "$1" "$2" }
 function gbA { git branch -a -D "$1" }
 function gbl { git branch -a | grep -v '\*' | sed 's/^..//' }
 function gcl { git clone "$1" }
+
+# Minha lista de comandos
+function Listar-Atalhos {
+  Write-Output "----------------------------------------"
+  Write-Output "Atalhos Customizados"
+  Write-Output "----------------------------------------"
+  Write-Output "eth         - Lista os endereços de rede"
+  Write-Output "vim         - Abre o editor vim"
+  Write-Output "ll          - Lista os arquivos do diretório atual"
+  Write-Output "grep        - Busca por palavras no diretório atual"
+  Write-Output "sed         - Substitui palavras no diretório atual"
+  Write-Output "tig         - Abre o tig"
+  Write-Output "less        - Abre o less"
+  Write-Output "ytscpt      - Abre o Youtube-Script do youtube-dl"
+  Write-Output "update      - Atualiza o sistema (chocolatey, scoop, winget, Update-Module)"
+  Write-Output "cls         - Limpa a tela"
+  Write-Output "exit        - Fecha o shell"
+  Write-Output "weather     - Mostra a previsão do tempo"
+  Write-Output "which       - Mostra o caminho do arquivo"
+  Write-Output "codar       - Abre a pasta ﱮ \Code"
+  Write-Output "----------------------------------------"
+  Write-Output "Atalhos do Git"
+  Write-Output "----------------------------------------"
+  Write-Output "openGitHub  - Abre meu perfil no GitHub"
+  Write-Output "g           - git"
+  Write-Output "gi          - git init"
+  Write-Output "ga          - git add ."
+  Write-Output "gs          - git status"
+  Write-Output "gp          - git pull"
+  Write-Output "gpsh        - git push"
+  Write-Output "gpom        - git push origin main"
+  Write-Output "gpo         - git push origin"
+  Write-Output "gpl         - git pull origin"
+  Write-Output "gd          - git diff"
+  Write-Output "gco         - git commit -m 'message' (escreva a mensagem em uma váriavel $ 1)"
+  Write-Output "gca         - git commit -am 'message' (escreva a mensagem em uma váriavel $ 1)"
+  Write-Output "gcout       - git checkout"
+  Write-Output "gb          - git branch"
+  Write-Output "gba         - git branch -a"
+  Write-Output "gb          - git branch"
+  Write-Output "gbD         - git branch -D '$ 1' (escreva o nome da branch em uma váriavel $ 1)"
+  Write-Output "gbR         - git branch -m '$ 1' (escreva o nome da branch em uma váriavel $ 1)"
+  Write-Output "gbM         - git branch -m '$ 1' '$ 2' (escreva o nome da branch em uma váriavel $ 1 e o nome da branch em uma váriavel $ 2)"
+  Write-Output "gbA         - git branch -a -D '$ 1' (escreva o nome da branch em uma váriavel $ 1)"
+  Write-Output "gbl         - git branch -a | grep -v '\*' | sed 's/^..//'"
+  Write-Output "gcl         - git clone '$ 1' (escreva o caminho do repositório em uma váriavel $ 1)"
+}
