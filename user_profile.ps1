@@ -34,6 +34,7 @@ Set-Alias grep findstr
 Set-Alias sed 'C:\Program Files\Git\usr\bin\sed.exe'
 Set-Alias tig 'C:\Program Files\Git\usr\bin\tig.exe'
 Set-Alias less 'C:\Program Files\Git\usr\bin\less.exe'
+Set-Alias ytscpt 'C:\Users\guss_\scoop\shims\youtube-dl_script.ps1'
 
 # Utilities
 function update { 
@@ -88,3 +89,4 @@ function gbR { git branch -m "$1" }
 function gbM { git branch -m "$1" "$2" }
 function gbA { git branch -a -D "$1" }
 function gbl { git branch -a | grep -v '\*' | sed 's/^..//' }
+function gcl { git clone "$1" }
