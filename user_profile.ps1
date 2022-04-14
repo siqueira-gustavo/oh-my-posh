@@ -110,6 +110,8 @@ function Listar-Atalhos {
   Write-Output "weather     - Mostra a previsão do tempo"
   Write-Output "which       - Mostra o caminho do arquivo"
   Write-Output "codar       - Abre a pasta ﱮ \Code"
+  Write-Output "pwsh-config - Abre a pasta ﱮ \.config\powershell"
+  Write-Output "pwsh-code   - Abre a pasta ﱮ \.config\powershell"
   Write-Output "----------------------------------------"
   Write-Output "Atalhos do Git"
   Write-Output "----------------------------------------"
