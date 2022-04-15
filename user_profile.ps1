@@ -75,6 +75,7 @@ function codar { cd 'D:\Users\guss_\Documents\CODE' }
 function SARP { cd 'D:\Users\guss_\Documents\# SARP' }
 function guga { cd 'D:\Users\guss_\Documents\# PESSOAIS' }
 function CVA { code 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\Relatórios SR\CVA' }
+function abrir { explorer . }
 
 # git aliases
 function gi { git init }
