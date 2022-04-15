@@ -75,7 +75,7 @@ function codar { cd 'D:\Users\guss_\Documents\CODE' }
 function SARP { cd 'D:\Users\guss_\Documents\# SARP' }
 function guga { cd 'D:\Users\guss_\Documents\# PESSOAIS' }
 function CVA { code 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\Relatórios SR\CVA' }
-function rastreio { code 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\correios_cli' }
+function rast-config { code 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\correios_cli' }
 function abrir { explorer . }
 
 # git aliases
@@ -124,7 +124,7 @@ function Listar-Atalhos {
   Write-Output "SARP        - Abre a pasta ﱮ \# SARP"
   Write-Output "guga        - Abre a pasta ﱮ \# PESSOAIS"
   Write-Output "CVA         - Abre a pasta ﱮ \# PESSOAIS\Projects\Relatórios SR\CVA"
-  Write-Output "rastreio    - Abre a pasta ﱮ \# PESSOAIS\Projects\correios_cli"
+  Write-Output "rast-config - Abre a pasta ﱮ \# PESSOAIS\Projects\correios_cli"
   Write-Output "abrir       - Abre o diretório atual"
     Write-Output "----------------------------------------"
   Write-Output "Atalhos do Git"
