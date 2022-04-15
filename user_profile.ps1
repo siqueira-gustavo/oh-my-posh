@@ -124,6 +124,7 @@ function Listar-Atalhos {
   Write-Output "SARP        - Abre a pasta ﱮ \# SARP"
   Write-Output "guga        - Abre a pasta ﱮ \# PESSOAIS"
   Write-Output "CVA         - Abre a pasta ﱮ \# PESSOAIS\Projects\Relatórios SR\CVA"
+  Write-Output "rastreio    - Abre a pasta ﱮ \# PESSOAIS\Projects\correios_cli"
   Write-Output "abrir       - Abre o diretório atual"
     Write-Output "----------------------------------------"
   Write-Output "Atalhos do Git"
