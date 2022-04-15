@@ -41,7 +41,11 @@ function update {
   sudo choco upgrade all &&
   scoop update * && 
   winget upgrade --all && 
-  Update-Module -Name oh-my-posh -Scope CurrentUser
+  Update-Module -Name Terminal-Icons -Force &&
+  Update-Module -Name oh-my-posh -Force &&
+  Update-Module -Name PSReadLine -Force &&
+  Update-Module -Name PSFzf -Force &&
+  Update-Module -Name z -Force
 }
 
 function weather { curl wttr.in/Lauro_de_Freitas?lang=pt }
@@ -68,6 +72,7 @@ function openGitHub {
 function codar { cd 'D:\Users\guss_\Documents\CODE' }
 function pwsh-config { cd 'C:\Users\guss_\.config\powershell' }
 function pwsh-code { code 'C:\Users\guss_\.config\powershell' }
+function CVA { code 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\Relatórios SR\CVA' }
 
 # git aliases
 function gi { git init }
