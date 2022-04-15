@@ -69,9 +69,11 @@ function openGitHub {
   }
 }
 
-function codar { cd 'D:\Users\guss_\Documents\CODE' }
 function pwsh-config { cd 'C:\Users\guss_\.config\powershell' }
 function pwsh-code { code 'C:\Users\guss_\.config\powershell' }
+function codar { cd 'D:\Users\guss_\Documents\CODE' }
+function SARP { code 'D:\Users\guss_\Documents\# SARP' }
+function guga { code 'D:\Users\guss_\Documents\# PESSOAIS' }
 function CVA { code 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\Relatórios SR\CVA' }
 
 # git aliases
