@@ -28,13 +28,20 @@ $env:GIT_SSH = "C:\Windows\system32\OpenSSH\ssh.exe"
 # Alias
 Set-Alias eth Get-NetAdapter
 Set-Alias vim nvim
-Set-Alias ll ls
+Set-Alias ls lsd
+Set-Alias ll lla
 Set-Alias g git
 Set-Alias grep findstr
 Set-Alias sed 'C:\Program Files\Git\usr\bin\sed.exe'
 Set-Alias tig 'C:\Program Files\Git\usr\bin\tig.exe'
 Set-Alias less 'C:\Program Files\Git\usr\bin\less.exe'
 Set-Alias ytscpt 'C:\Users\guss_\scoop\shims\youtube-dl_script.ps1'
+
+# Aliases for lsd (LSDeluxe), inspired by colorls project
+function l { ls -l -X }
+function la { ls -a -X }
+function lla { ls -la -X }
+function lt { ls --tree -X }
 
 # Utilities
 function update { 
@@ -105,15 +112,23 @@ function Listar-Atalhos {
   Write-Output "----------------------------------------"
   Write-Output "Atalhos Customizados"
   Write-Output "----------------------------------------"
+  Write-Output "ll          - Listar arquivos"
+  Write-Output "lt          - Listar arquivos em árvore"
   Write-Output "eth         - Lista os endereços de rede"
-  Write-Output "vim         - Abre o editor vim"
+  Write-Output "vim         - Abre o editor nvim"
+  Write-Output "duf         - Disk Usage/Free Utility (Linux, BSD, macOS & Windows)"
+  Write-Output "btm         - htop similar to Windows Task Manager"
+  Write-Output "broot       - File Browser (Windows), similar to Ranger (Linux, BSD, macOS)"
+  Write-Output "spt         - Spotify TUI (Linux, BSD, macOS & Windows) - A Spotify client for the terminal written in Rust."
+  Write-Output "cash        - Faz conversão de moedas"
+  Write-Output "curl        - Faz requisições HTTP"
   Write-Output "ll          - Lista os arquivos do diretório atual"
   Write-Output "grep        - Busca por palavras no diretório atual"
   Write-Output "sed         - Substitui palavras no diretório atual"
   Write-Output "tig         - Abre o tig"
   Write-Output "less        - Abre o less"
   Write-Output "ytscpt      - Abre o Youtube-Script do youtube-dl"
-  Write-Output "update      - Atualiza o sistema (chocolatey, scoop, winget, Update-Module)"
+  Write-Output "update      - Atualiza todos os pacotes do sistema (chocolatey, scoop, winget, Update-Module)"
   Write-Output "cls         - Limpa a tela"
   Write-Output "exit        - Fecha o shell"
   Write-Output "weather     - Mostra a previsão do tempo"
@@ -126,7 +141,7 @@ function Listar-Atalhos {
   Write-Output "CVA         - Abre a pasta ﱮ \# PESSOAIS\Projects\Relatórios SR\CVA"
   Write-Output "rast-config - Abre a pasta ﱮ \# PESSOAIS\Projects\correios_cli"
   Write-Output "abrir       - Abre o diretório atual"
-    Write-Output "----------------------------------------"
+  Write-Output "----------------------------------------"
   Write-Output "Atalhos do Git"
   Write-Output "----------------------------------------"
   Write-Output "openGitHub  - Abre meu perfil no GitHub"
