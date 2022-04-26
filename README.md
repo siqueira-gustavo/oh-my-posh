@@ -1,11 +1,15 @@
-# PowerShell setup (Windows)
+# PowerShell Setup (Windows)
 
-## # Tema personalizado - Oh My Posh
+## # Guga's dotfiles - Oh My Posh
+
+![Screenshot resultado](./img/video-001.gif)
+
+![Screenshot resultado](./img/screenshot-007.png)
 
 <!-- TOC -->
 
-- [PowerShell setup Windows](#powershell-setup-windows)
-    - [# Tema personalizado - Oh My Posh](#-tema-personalizado---oh-my-posh)
+- [PowerShell Setup Windows](#powershell-setup-windows)
+    - [# Guga's dotfiles - Oh My Posh](#-gugas-dotfiles---oh-my-posh)
     - [Informações gerais](#informa%C3%A7%C3%B5es-gerais)
     - [Tecnologias utilizadas](#tecnologias-utilizadas)
     - [Como customizar o tema do Oh My Posh](#como-customizar-o-tema-do-oh-my-posh)
@@ -29,12 +33,17 @@ Minhas configurações e tecnologias para utilização do Windows Terminal com o
 - [Terminal-Icons](https://github.com/devblackops/Terminal-Icons)
 - [PSFzf](https://github.com/kelleyma49/PSFzf)
 - [PSReadLine](https://docs.microsoft.com/en-us/powershell/module/psreadline/?view=powershell-7.2)
+- [Git-Posh](https://github.com/dahlbyk/posh-git)
 - [Git for Windows](https://gitforwindows.org/)
+- [LSD (LSDeluxe)](https://github.com/Peltoche/lsd)
+- [Git for Windows](https://gitforwindows.org/)
+- [VSCode](https://code.visualstudio.com/)
 - [Nvim](https://github.com/neovim/neovim)
 - [Scoop](https://scoop.sh/)
 - [Chocolatey](https://chocolatey.org/)
 - [Winget](https://docs.microsoft.com/pt-br/windows/package-manager/winget/)
 - [Wget](https://www.gnu.org/software/wget/)
+- [wttr.in](https://github.com/chubin/wttr.in)
 
 ## Como customizar o tema do Oh My Posh
 

@@ -53,7 +53,7 @@ $lsd_config = Join-Path $env:USERPROFILE\.config\powershell "lsd-config.yaml"
 function l { ls -Xl --config-file $lsd_config }
 function la { ls -Xa --config-file $lsd_config }
 function lla { ls -Xla --config-file $lsd_config }
-function lt { ls --Xtree --config-file $lsd_config }
+function lt { ls -X --tree --config-file $lsd_config }
 
 # Utilities
 function update {
