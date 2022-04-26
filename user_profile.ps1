@@ -1,10 +1,14 @@
 # Prompt
 Import-Module posh-git
-Import-Module oh-my-posh
+
+# O Oh My Posh não suporta mais módulos do PowerShell. Para instalá-lo, terá que usar outra ferramenta.
+# Clique no link abaixo para ver como migrar.
+# https://ohmyposh.dev/docs/migrating
+# Import-Module oh-my-posh
 
 # Load prompt config
-$omp_config = Join-Path $PSScriptRoot ".\gugaguga.omp.json"
-oh-my-posh --init --shell pwsh --config $omp_config | Invoke-Expression
+$omp_config = Join-Path $env:USERPROFILE\.config\powershell "gugaguga.omp.json"
+oh-my-posh init pwsh --config $omp_config | Invoke-Expression
 
 # Set-PoshPrompt -Theme clean-detailed
 # Set-PoshPrompt -Theme space
@@ -54,12 +58,15 @@ function lla { ls -la -X }
 function lt { ls --tree -X }
 
 # Utilities
-function update { 
+function update {
+  Write-Output "Updating Choco..."
   sudo choco upgrade all &&
+  Write-Output "`n`nUpdating Scoop..."
   scoop update * && 
+  Write-Output "`n`nUpdating Winget..."
   winget upgrade --all && 
+  Write-Output "`n`nUpdating PowerShell Modules..."
   Update-Module -Name Terminal-Icons -Force &&
-  Update-Module -Name oh-my-posh -Force &&
   Update-Module -Name PSReadLine -Force &&
   Update-Module -Name PSFzf -Force &&
   Update-Module -Name z -Force
