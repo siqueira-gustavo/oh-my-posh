@@ -12,11 +12,20 @@ oh-my-posh --init --shell pwsh --config $omp_config | Invoke-Expression
 Import-Module -Name Terminal-Icons
 
 # PSReadLine
+
+# Autosugestões do PSReadline
+Set-PSReadlineOption -ShowToolTips
 Set-PSReadLineOption -EditMode Emacs
 Set-PSReadLineOption -BellStyle None
-Set-PSReadLineKeyHandler -Chord 'Ctrl+d' -Function DeleteChar
 Set-PSReadLineOption -PredictionSource History
 Set-PSReadLineOption -PredictionViewStyle ListView
+Set-PSReadlineOption -HistorySearchCursorMovesToEnd
+
+# Autocomplete, keybinds e histórico de comandos
+Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+Set-PSReadLineKeyHandler -Chord 'Ctrl+d' -Function DeleteChar
+Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 
 # Fzf
 Import-Module PSFzf
@@ -32,6 +41,7 @@ Set-Alias ls lsd
 Set-Alias ll lla
 Set-Alias g git
 Set-Alias grep findstr
+Set-Alias find fd
 Set-Alias sed 'C:\Program Files\Git\usr\bin\sed.exe'
 Set-Alias tig 'C:\Program Files\Git\usr\bin\tig.exe'
 Set-Alias less 'C:\Program Files\Git\usr\bin\less.exe'
