@@ -49,10 +49,11 @@ Set-Alias less 'C:\Program Files\Git\usr\bin\less.exe'
 Set-Alias ytscpt 'C:\Users\guss_\scoop\shims\youtube-dl_script.ps1'
 
 # Aliases for lsd (LSDeluxe), inspired by colorls project
-function l { ls -l -X }
-function la { ls -a -X }
-function lla { ls -la -X }
-function lt { ls --tree -X }
+$lsd_config = Join-Path $env:USERPROFILE\.config\powershell "lsd-config.yaml"
+function l { ls -Xl --config-file $lsd_config }
+function la { ls -Xa --config-file $lsd_config }
+function lla { ls -Xla --config-file $lsd_config }
+function lt { ls --Xtree --config-file $lsd_config }
 
 # Utilities
 function update {
