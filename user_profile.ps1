@@ -1,22 +1,20 @@
-# Prompt
+# Prompt Imports
+Import-Module Terminal-Icons
 Import-Module posh-git
+Import-Module PSFzf
 
+# Import-Module oh-my-posh
 # O Oh My Posh não suporta mais módulos do PowerShell. Para instalá-lo, terá que usar outra ferramenta.
 # Clique no link abaixo para ver como migrar.
 # https://ohmyposh.dev/docs/migrating
-# Import-Module oh-my-posh
 
-# Load prompt config
+# Show weather
+curl wttr.in/Lauro_de_Freitas?format="%l:+%c+%t+%m\n"
+# Load Oh My Posh prompt (with custom theme) config file
 $omp_config = Join-Path $env:USERPROFILE\.config\powershell "gugaguga.omp.json"
 oh-my-posh init pwsh --config $omp_config | Invoke-Expression
 
-# Set-PoshPrompt -Theme clean-detailed
-# Set-PoshPrompt -Theme space
-
-Import-Module -Name Terminal-Icons
-
 # PSReadLine
-
 # Autosugestões do PSReadline
 Set-PSReadlineOption -ShowToolTips
 Set-PSReadLineOption -EditMode Emacs
@@ -32,7 +30,6 @@ Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 
 # Fzf
-Import-Module PSFzf
 Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory 'Ctrl+r'
 
 # Env
@@ -61,13 +58,14 @@ function lt { ls --tree -X }
 function update {
   Write-Output "Updating Choco..."
   sudo choco upgrade all &&
-  Write-Output "`n`nUpdating Scoop..."
+  Write-Output "`nUpdating Scoop..."
   scoop update * && 
-  Write-Output "`n`nUpdating Winget..."
+  Write-Output "`nUpdating Winget..."
   winget upgrade --all && 
-  Write-Output "`n`nUpdating PowerShell Modules..."
+  Write-Output "`nUpdating PowerShell Modules..."
   Update-Module -Name Terminal-Icons -Force &&
   Update-Module -Name PSReadLine -Force &&
+  Update-Module -Name posh-git -Force &&
   Update-Module -Name PSFzf -Force &&
   Update-Module -Name z -Force
 }
