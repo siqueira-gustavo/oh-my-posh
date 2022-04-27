@@ -65,8 +65,9 @@ icons:
 
 # == Ignore Globs ==
 # A list of globs to ignore when listing.
-# ignore-globs:
+ignore-globs:
 #   - .git
+  - node_modules
 
 # == Indicators ==
 # Whether to add indicator characters to certain listed files.
