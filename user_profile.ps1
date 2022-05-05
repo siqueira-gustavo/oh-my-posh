@@ -68,7 +68,7 @@ function update {
   Update-Module -Name Terminal-Icons -Force &&
   Update-Module -Name PSReadLine -Force &&
   Update-Module -Name posh-git -Force &&
-  Update-Module -Name PSFzf -Force &&
+  # Update-Module -Name PSFzf -Force &&
   Update-Module -Name z -Force
 }
 
