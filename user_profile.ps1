@@ -60,7 +60,7 @@ function lt { ls -X --tree --config-file $lsd_config }
 function update {
   Write-Output "Updating Choco..."
   sudo choco upgrade all &&
-  # Write-Output "`nUpdating Scoop..."
+  Write-Output "`nUpdating Scoop..."
   scoop update * && 
   Write-Output "`nUpdating Winget..."
   winget upgrade --all && 
