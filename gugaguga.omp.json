@@ -1,5 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "console_title_template": "🌵 {{.Host}} in {{.Folder}}",
   "blocks": [
     {
       "alignment": "left",
@@ -16,7 +17,7 @@
         {
           "foreground": "lightGreen",
           "style": "plain",
-          "template": " {{ .HostName }} <#ffffff>in</> ",
+          "template": " 🌵 {{ .HostName }} <#ffffff>in</> ",
           "type": "session"
         },
         {
@@ -148,6 +149,5 @@
       "type": "rprompt"
     }
   ],
-  "console_title_template": "{{.Host}} in {{.Folder}}",
   "version": 2
 }
