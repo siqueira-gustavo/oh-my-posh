@@ -1,6 +1,7 @@
 # Prompt Imports
 Import-Module Terminal-Icons
 Import-Module posh-git
+# Tem um problema com o antivirus do windows que enxerga o binário do FZF como uma ameaça e não permite acesso ao repositório ou instalando via choco ou scoop.
 # Import-Module PSFzf
 
 # Import-Module oh-my-posh
@@ -108,6 +109,7 @@ function abrir { explorer . }
 # git aliases
 function gi { git init }
 function ga { git add . }
+function gr { git restore --staged * }
 function gs { git status }
 function gp { git pull }
 function gpsh { git push }
@@ -168,6 +170,7 @@ function Listar-Atalhos {
   Write-Output "g           - git"
   Write-Output "gi          - git init"
   Write-Output "ga          - git add ."
+  Write-Output "gr          - git restore --staged *"
   Write-Output "gs          - git status"
   Write-Output "gp          - git pull"
   Write-Output "gpsh        - git push"
