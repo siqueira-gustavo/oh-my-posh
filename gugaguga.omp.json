@@ -17,7 +17,7 @@
         {
           "foreground": "lightGreen",
           "style": "plain",
-          "template": " 🌵 {{ .HostName }} <#ffffff>in</> ",
+          "template": " 🌵 \u266f {{ .HostName }} <#ffffff>in</> ",
           "type": "session"
         },
         {
