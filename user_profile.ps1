@@ -18,21 +18,20 @@ oh-my-posh init pwsh --config $omp_config | Invoke-Expression
 # PSReadLine
 # Autosugestões do PSReadline
 Set-PSReadlineOption -ShowToolTips
-Set-PSReadLineOption -EditMode Emacs
+Set-PSReadLineOption -EditMode Windows
 Set-PSReadLineOption -BellStyle None
 Set-PSReadLineOption -PredictionSource History
 Set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadlineOption -HistorySearchCursorMovesToEnd
 
-# Autocomplete, keybinds e histórico de comandos
-Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
-Set-PSReadLineKeyHandler -Chord 'Ctrl+d' -Function DeleteChar
-Set-PSReadLineKeyHandler -Chord 'Ctrl+RightArrow' -Function ForwardWord
-Set-PSReadLineKeyHandler -Chord 'Ctrl+LeftArrow' -Function BackwardWord
-Set-PSReadLineKeyHandler -Chord 'Ctrl+Shift+RightArrow' -Function SelectForwardWord
-Set-PSReadLineKeyHandler -Chord 'Ctrl+Shift+LeftArrow' -Function SelectBackwardWord
-Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
-Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+# Autocomplete, keybinds e histórico de comandos [ Comandos para usar no modo Emacs ]
+# Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+# Set-PSReadLineKeyHandler -Chord 'Ctrl+RightArrow' -Function ForwardWord
+# Set-PSReadLineKeyHandler -Chord 'Ctrl+LeftArrow' -Function BackwardWord
+# Set-PSReadLineKeyHandler -Chord 'Ctrl+Shift+RightArrow' -Function SelectForwardWord
+# Set-PSReadLineKeyHandler -Chord 'Ctrl+Shift+LeftArrow' -Function SelectBackwardWord
+# Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+# Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 
 # Fzf
 # Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory 'Ctrl+r'
