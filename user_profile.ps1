@@ -40,7 +40,7 @@ Set-PSReadlineOption -HistorySearchCursorMovesToEnd
 $env:GIT_SSH = "C:\Windows\system32\OpenSSH\ssh.exe"
 
 # Alias
-Set-Alias eth Get-NetAdapter
+Set-Alias eth Get-NetIPConfiguration
 Set-Alias vim nvim
 Set-Alias ls lsd
 Set-Alias ll lla
