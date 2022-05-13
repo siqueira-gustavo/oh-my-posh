@@ -24,8 +24,8 @@ Set-PSReadLineOption -PredictionSource History
 Set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadlineOption -HistorySearchCursorMovesToEnd
 
+Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 # Autocomplete, keybinds e histórico de comandos [ Comandos para usar no modo Emacs ]
-# Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 # Set-PSReadLineKeyHandler -Chord 'Ctrl+RightArrow' -Function ForwardWord
 # Set-PSReadLineKeyHandler -Chord 'Ctrl+LeftArrow' -Function BackwardWord
 # Set-PSReadLineKeyHandler -Chord 'Ctrl+Shift+RightArrow' -Function SelectForwardWord
@@ -40,7 +40,7 @@ Set-PSReadlineOption -HistorySearchCursorMovesToEnd
 $env:GIT_SSH = "C:\Windows\system32\OpenSSH\ssh.exe"
 
 # Alias
-Set-Alias eth Get-NetIPConfiguration
+Set-Alias eth Get-NetAdapter
 Set-Alias vim nvim
 Set-Alias ls lsd
 Set-Alias ll lla
