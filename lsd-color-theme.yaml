@@ -1,4 +1,4 @@
-user: 230
+user: 250
 group: 187
 permission:
   read: dark_green
@@ -6,9 +6,6 @@ permission:
   exec: dark_red
   exec-sticky: 5
   no-access: 245
-  octal: 6
-  acl: dark_cyan
-  context: cyan
 date:
   hour-old: 40
   day-old: 42
@@ -24,4 +21,4 @@ inode:
 links:
   valid: 13
   invalid: 245
-tree-edge: 245
+tree-edge: 250
