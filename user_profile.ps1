@@ -75,6 +75,17 @@ function update {
   Update-Module -Name z -Force
 }
 
+# Functions to search things on Google
+function google_it_for_me {
+  $search = $args[0]
+  if ($search -eq $null) {
+    Write-Output "Usage: google_it_for_me <search>"
+  } else {
+    Write-Output "Searching for '$search' on Google..."
+    Start-Process "https://www.google.com/search?q=$search"
+  }
+}
+
 function weather { curl wttr.in/Lauro_de_Freitas?lang=pt }
 
 function which ($command) {
