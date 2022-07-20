@@ -53,6 +53,30 @@
       "alignment": "right",
       "segments": [
         {
+          "background": "#c4a000",
+          "foreground": "#000000",
+          "invert_powerline": true,
+          "properties": {
+            "always_enabled": true
+          },
+          "style": "diamond",
+          "template": " \uf252 {{ .FormattedMs }} ",
+          "leading_diamond": "\ue0b6",
+          "type": "executiontime"
+        },
+        {
+          "type": "shell",
+          "style": "plain",
+          "powerline_symbol": "\uE0B0",
+          "foreground": "#ffffff",
+          "background": "#0077c2",
+          "properties": {
+            "mapped_shell_names": {
+              "pwsh": "\uE795 pwsh"
+            }
+          }
+        },
+        {
           "background": "#b69ffd",
           "foreground": "#7650e7",
           "properties": {
@@ -106,17 +130,6 @@
           "type": "aws"
         },
         {
-          "background": "#c4a000",
-          "foreground": "#000000",
-          "invert_powerline": true,
-          "properties": {
-            "always_enabled": true
-          },
-          "style": "plain",
-          "template": " {{ .FormattedMs }} \uf252 ",
-          "type": "executiontime"
-        },
-        {
           "background": "#d3d7cf",
           "foreground": "#000000",
           "invert_powerline": true,
@@ -124,7 +137,7 @@
             "time_format": "15:04:05"
           },
           "style": "plain",
-          "template": " {{ .CurrentDate | date .Format }} \uf017 ",
+          "template": " \uf017 {{ .CurrentDate | date .Format }} ",
           "type": "time"
         },
         {
@@ -136,12 +149,12 @@
           ],
           "foreground": "#193549",
           "properties": {
-            "charged_icon": "\uf1e6 ",
-            "charging_icon": "\ue234 ",
-            "discharging_icon": "\ue231 "
+            "charged_icon": "\uf740 ",
+            "charging_icon": "\uf1e6 ",
+            "discharging_icon": "\uF742 "
           },
           "style": "diamond",
-          "template": " {{ if not .Error }}{{.Icon}}{{.Percentage}}%{{ end }} \uf583 ",
+          "template": " \uf583 {{ if not .Error }}{{.Icon}}{{.Percentage}}%{{ end }} ",
           "trailing_diamond": "\ue0b4",
           "type": "battery"
         }

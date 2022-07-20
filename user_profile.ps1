@@ -4,16 +4,16 @@ Import-Module posh-git
 # Tem um problema com o antivirus do windows que enxerga o binário do FZF como uma ameaça e não permite acesso ao repositório ou instalando via choco ou scoop.
 # Import-Module PSFzf
 
-# Import-Module oh-my-posh
-# O Oh My Posh não suporta mais módulos do PowerShell. Para instalá-lo, terá que usar outra ferramenta.
-# Clique no link abaixo para ver como migrar.
-# https://ohmyposh.dev/docs/migrating
-
 # Show weather
 curl wttr.in/Lauro_de_Freitas?format="%l:+%c+%t+%m\n"
 # Load Oh My Posh prompt (with custom theme) config file
 $omp_config = Join-Path $env:USERPROFILE\.config\powershell "gugaguga.omp.json"
 oh-my-posh init pwsh --config $omp_config | Invoke-Expression
+
+# Import-Module oh-my-posh
+# O Oh My Posh não suporta mais módulos do PowerShell. Para instalá-lo, terá que usar outra ferramenta.
+# Clique no link abaixo para ver como migrar.
+# https://ohmyposh.dev/docs/migrating
 
 # PSReadLine
 # Autosugestões do PSReadline
@@ -34,7 +34,7 @@ Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 # Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 
 # Fzf
-# Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory 'Ctrl+r'
+Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory 'Ctrl+r'
 
 # Env
 $env:GIT_SSH = "C:\Windows\system32\OpenSSH\ssh.exe"
@@ -51,6 +51,7 @@ Set-Alias sed 'C:\Program Files\Git\usr\bin\sed.exe'
 Set-Alias tig 'C:\Program Files\Git\usr\bin\tig.exe'
 Set-Alias less 'C:\Program Files\Git\usr\bin\less.exe'
 Set-Alias ytscpt 'C:\Users\guss_\scoop\shims\youtube-dl_script.ps1'
+Set-Alias upd update
 
 # Aliases for lsd (LSDeluxe), inspired by colorls project
 $lsd_config = Join-Path $env:USERPROFILE\.config\powershell "lsd-config.yaml"
@@ -64,7 +65,7 @@ function update {
   Write-Output "Updating Choco..."
   sudo choco upgrade all &&
   Write-Output "`nUpdating Scoop..."
-  scoop update * && 
+  scoop update * && scoop cleanup * &&
   Write-Output "`nUpdating Winget..."
   winget upgrade --all && 
   Write-Output "`nUpdating PowerShell Modules..."
@@ -75,7 +76,7 @@ function update {
   Update-Module -Name z -Force
 }
 
-# Functions to search things on Google
+# Function to search things on Google
 function google_it_for_me {
   $search = $args[0]
   if ($search -eq $null) {
@@ -83,6 +84,16 @@ function google_it_for_me {
   } else {
     Write-Output "Searching for '$search' on Google..."
     Start-Process "https://www.google.com/search?q=$search"
+  }
+}
+
+# Function to create a new File
+function touch {
+  $file = $args[0]
+  if ($file -eq $null) {
+    Write-Output "Usage: touch <file>"
+  } else {
+    New-Item -ItemType File -Force -Path $file
   }
 }
 
@@ -110,10 +121,15 @@ function openGitHub {
 
 function pwsh-config { cd 'C:\Users\guss_\.config\powershell' }
 function pwsh-code { code 'C:\Users\guss_\.config\powershell' }
+function pwsh-vim { vim 'C:\Users\guss_\.config\powershell' }
+function nvim-config { vim 'C:\Users\guss_\AppData\Local\nvim'}
+function unxutil { cd 'C:\Users\guss_\scoop\apps\unxutils\current\usr\local\wbin\' }
+function docs { cd 'D:\Users\guss_\Documents\' }
 function codar { cd 'D:\Users\guss_\Documents\CODE' }
 function SARP { cd 'D:\Users\guss_\Documents\# SARP' }
 function guga { cd 'D:\Users\guss_\Documents\# PESSOAIS' }
 function CVA { code 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\Relatórios SR\CVA' }
+function vCVA { vim 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\Relatórios SR\CVA' }
 function rast-config { code 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\correios_cli' }
 function abrir { explorer . }
 
@@ -145,17 +161,18 @@ function Listar-Atalhos {
   Write-Output "----------------------------------------"
   Write-Output "Atalhos Customizados"
   Write-Output "----------------------------------------"
-  Write-Output "ll          - Listar arquivos"
-  Write-Output "lt          - Listar arquivos em árvore"
+  Write-Output "ll          - Listar os arquivos do diretório atual"
+  Write-Output "lt          - Listar os arquivos do diretório atual em árvore"
   Write-Output "eth         - Lista os endereços de rede"
   Write-Output "vim         - Abre o editor nvim"
   Write-Output "duf         - Disk Usage/Free Utility (Linux, BSD, macOS & Windows)"
+  Write-Output "img2pdf     - Losslessly convert raster images to PDF (Usage: img2pdf <input_file.jpg, .png, etc.> -o <output_file.pdf>)"
+  Write-Output "ntop        - htop similar to Windows Task Manager"
   Write-Output "btm         - htop similar to Windows Task Manager"
-  Write-Output "broot       - File Browser (Windows), similar to Ranger (Linux, BSD, macOS)"
+  Write-Output "lf          - File Browser (Windows), similar to Ranger (Linux, BSD, macOS)"
   Write-Output "spt         - Spotify TUI (Linux, BSD, macOS & Windows) - A Spotify client for the terminal written in Rust."
   Write-Output "cash        - Faz conversão de moedas"
   Write-Output "curl        - Faz requisições HTTP"
-  Write-Output "ll          - Lista os arquivos do diretório atual"
   Write-Output "grep        - Busca por palavras no diretório atual"
   Write-Output "sed         - Substitui palavras no diretório atual"
   Write-Output "tig         - Abre o tig"
@@ -167,12 +184,14 @@ function Listar-Atalhos {
   Write-Output "weather     - Mostra a previsão do tempo"
   Write-Output "which       - Mostra o caminho do arquivo"
   Write-Output "pwsh-config - Abre a pasta ﱮ \.config\powershell"
-  Write-Output "pwsh-code   - Abre a pasta ﱮ \.config\powershell"
+  Write-Output "pwsh-vim    - Abre as configurações do powershell no VIM"
+  Write-Output "pwsh-code   - Abre as configurações do powershell no VS Code"
   Write-Output "codar       - Abre a pasta ﱮ \Code"
   Write-Output "SARP        - Abre a pasta ﱮ \# SARP"
   Write-Output "guga        - Abre a pasta ﱮ \# PESSOAIS"
-  Write-Output "CVA         - Abre a pasta ﱮ \# PESSOAIS\Projects\Relatórios SR\CVA"
   Write-Output "rast-config - Abre a pasta ﱮ \# PESSOAIS\Projects\correios_cli"
+  Write-Output "CVA         - Abre o projeto CVA na pasta ﱮ \CODE\Projects\Relatórios SR\CVA no VS Code"
+  Write-Output "vCVA        - Abre o projeto CVA na pasta ﱮ \CODE\Projects\Relatórios SR\CVA no VIM"
   Write-Output "abrir       - Abre o diretório atual"
   Write-Output "----------------------------------------"
   Write-Output "Atalhos do Git"
