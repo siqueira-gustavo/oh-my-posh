@@ -88,12 +88,13 @@
           "type": "python"
         },
         {
-          "foreground": "#7FD5EA",
+          "background": "#79d4fd",
+          "foreground": "#007d9c",
           "properties": {
             "fetch_version": true
           },
           "style": "powerline",
-          "template": "[\ufcd1 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}]",
+          "template": "[\ufcd1{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}]",
           "type": "go"
         },
         {
