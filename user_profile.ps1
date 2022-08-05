@@ -45,11 +45,13 @@ Set-Alias vim nvim
 Set-Alias ls lsd
 Set-Alias ll lla
 Set-Alias g git
-Set-Alias grep findstr
+Set-Alias grep 'C:\Program Files\Git\usr\bin\grep.exe'
+# Set-Alias grep findstr
 Set-Alias find fd
 Set-Alias sed 'C:\Program Files\Git\usr\bin\sed.exe'
 Set-Alias tig 'C:\Program Files\Git\usr\bin\tig.exe'
 Set-Alias less 'C:\Program Files\Git\usr\bin\less.exe'
+Set-Alias wget 'C:\Users\guss_\scoop\apps\wget\current\wget.exe'
 Set-Alias ytscpt 'C:\Users\guss_\scoop\shims\youtube-dl_script.ps1'
 Set-Alias upd update
 
@@ -62,7 +64,9 @@ function lt { ls -X --tree --config-file $lsd_config }
 
 # Utilities
 function update {
-  Write-Output "Updating Choco..."
+  Write-Output "Updating npm..."
+  sudo npm-windows-upgrade --npm-version latest &&
+  Write-Output "`nUpdating Choco..."
   sudo choco upgrade all &&
   Write-Output "`nUpdating Scoop..."
   scoop update * && scoop cleanup * &&
@@ -128,6 +132,7 @@ function docs { cd 'D:\Users\guss_\Documents\' }
 function codar { cd 'D:\Users\guss_\Documents\CODE' }
 function SARP { cd 'D:\Users\guss_\Documents\# SARP' }
 function guga { cd 'D:\Users\guss_\Documents\# PESSOAIS' }
+function jw { cd 'D:\Users\guss_\Documents\# PESSOAIS\Teocráticos' }
 function CVA { code 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\Relatórios SR\CVA' }
 function vCVA { vim 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\Relatórios SR\CVA' }
 function rast-config { code 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\correios_cli' }
