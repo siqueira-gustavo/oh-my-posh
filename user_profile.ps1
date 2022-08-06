@@ -43,6 +43,7 @@ $env:GIT_SSH = "C:\Windows\system32\OpenSSH\ssh.exe"
 Set-Alias eth Get-NetAdapter
 Set-Alias vim nvim
 Set-Alias g git
+Set-Alias ogh openGitHub
 Set-Alias lg lazygit
 Set-Alias ls lsd
 Set-Alias ll lla
@@ -203,6 +204,8 @@ function Listar-Atalhos {
   Write-Output "Atalhos do Git"
   Write-Output "----------------------------------------"
   Write-Output "openGitHub  - Abre meu perfil no GitHub"
+  Write-Output "ogh         - Alias para openGitHub"
+  Write-Output "lg          - alias para lazygit"
   Write-Output "g           - git"
   Write-Output "gi          - git init"
   Write-Output "ga          - git add ."
