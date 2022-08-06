@@ -42,15 +42,16 @@ $env:GIT_SSH = "C:\Windows\system32\OpenSSH\ssh.exe"
 # Alias
 Set-Alias eth Get-NetAdapter
 Set-Alias vim nvim
+Set-Alias g git
+Set-Alias lg lazygit
 Set-Alias ls lsd
 Set-Alias ll lla
-Set-Alias g git
-Set-Alias grep 'C:\Program Files\Git\usr\bin\grep.exe'
-# Set-Alias grep findstr
 Set-Alias find fd
 Set-Alias sed 'C:\Program Files\Git\usr\bin\sed.exe'
 Set-Alias tig 'C:\Program Files\Git\usr\bin\tig.exe'
 Set-Alias less 'C:\Program Files\Git\usr\bin\less.exe'
+Set-Alias grep 'C:\Program Files\Git\usr\bin\grep.exe'
+# Set-Alias grep findstr
 Set-Alias wget 'C:\Users\guss_\scoop\apps\wget\current\wget.exe'
 Set-Alias ytscpt 'C:\Users\guss_\scoop\shims\youtube-dl_script.ps1'
 Set-Alias upd update
