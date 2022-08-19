@@ -55,6 +55,7 @@ Set-Alias grep 'C:\Program Files\Git\usr\bin\grep.exe'
 # Set-Alias grep findstr
 Set-Alias wget 'C:\Users\guss_\scoop\apps\wget\current\wget.exe'
 Set-Alias ytscpt 'C:\Users\guss_\scoop\shims\youtube-dl_script.ps1'
+Set-Alias pwd 'C:\Users\guss_\scoop\apps\unxutils\current\usr\local\wbin\pwd.exe'
 Set-Alias upd update
 
 # Aliases for lsd (LSDeluxe), inspired by colorls project
@@ -68,6 +69,13 @@ function lt { ls -X --tree --config-file $lsd_config }
 function update {
   Write-Output "Updating npm..."
   sudo npm-windows-upgrade --npm-version latest &&
+  Write-Output "`nUpdating Python..."
+  # run pip list and check if there is this warning: "WARNING: Ignoring invalid distribution -ip (c:\python310\lib\site-packages)"
+  pip list | Where-Object {$_.Contains("WARNING: Ignoring invalid distribution -ip (c:\python310\lib\site-packages")}
+  if ($?) { # if there is a warning, then remove all invalid distributions 
+    sudo rm -r 'c:\python310\lib\site-packages\~*'
+  }
+  sudo python.exe -m pip install --upgrade pip
   Write-Output "`nUpdating Choco..."
   sudo choco upgrade all &&
   Write-Output "`nUpdating Scoop..."
@@ -129,6 +137,7 @@ function pwsh-config { cd 'C:\Users\guss_\.config\powershell' }
 function pwsh-code { code 'C:\Users\guss_\.config\powershell' }
 function pwsh-vim { vim 'C:\Users\guss_\.config\powershell' }
 function nvim-config { vim 'C:\Users\guss_\AppData\Local\nvim'}
+function nvim-folder { cd 'C:\Users\guss_\AppData\Local\nvim'}
 function unxutil { cd 'C:\Users\guss_\scoop\apps\unxutils\current\usr\local\wbin\' }
 function docs { cd 'D:\Users\guss_\Documents\' }
 function codar { cd 'D:\Users\guss_\Documents\CODE' }
