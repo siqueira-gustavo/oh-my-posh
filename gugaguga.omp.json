@@ -26,7 +26,7 @@
             "style": "folder"
           },
           "style": "plain",
-          "template": "<#26C6DA>\ufc6e </>/{{ .Path }} ",
+          "template": "<#26C6DA>\ufc6e </>\\{{ .Path }} ",
           "type": "path"
         },
         {

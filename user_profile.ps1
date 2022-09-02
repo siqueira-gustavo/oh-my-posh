@@ -88,6 +88,7 @@ function update {
   Update-Module -Name posh-git -Force &&
   # Update-Module -Name PSFzf -Force &&
   Update-Module -Name z -Force
+  refreshenv
 }
 
 # Function to search things on Google
