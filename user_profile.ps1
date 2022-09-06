@@ -56,6 +56,7 @@ Set-Alias grep 'C:\Program Files\Git\usr\bin\grep.exe'
 Set-Alias wget 'C:\Users\guss_\scoop\apps\wget\current\wget.exe'
 Set-Alias ytscpt 'C:\Users\guss_\scoop\shims\youtube-dl_script.ps1'
 Set-Alias pwd 'C:\Users\guss_\scoop\apps\unxutils\current\usr\local\wbin\pwd.exe'
+Set-Alias msedge 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
 Set-Alias upd update
 
 # Aliases for lsd (LSDeluxe), inspired by colorls project
@@ -84,10 +85,10 @@ function update {
   winget upgrade --all && 
   Write-Output "`nUpdating PowerShell Modules..."
   Update-Module -Name Terminal-Icons -Force &&
-  Update-Module -Name PSReadLine -Force &&
   Update-Module -Name posh-git -Force &&
   # Update-Module -Name PSFzf -Force &&
-  Update-Module -Name z -Force
+  Update-Module -Name z -Force &&
+  Update-Module -Name PSReadLine -Force
   refreshenv
 }
 
