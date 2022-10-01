@@ -47,6 +47,7 @@ Set-Alias ogh openGitHub
 Set-Alias lg lazygit
 Set-Alias ls lsd
 Set-Alias ll lla
+Set-Alias ln 'C:\Users\guss_\scoop\apps\psutils\current\ln.ps1'
 Set-Alias find fd
 Set-Alias sed 'C:\Program Files\Git\usr\bin\sed.exe'
 Set-Alias tig 'C:\Program Files\Git\usr\bin\tig.exe'
@@ -103,15 +104,56 @@ function google_it_for_me {
   }
 }
 
-# Function to create a new File
-function touch {
-  $file = $args[0]
-  if ($file -eq $null) {
-    Write-Output "Usage: touch <file>"
-  } else {
-    New-Item -ItemType File -Force -Path $file
+function Install-Fonts {
+#   $SourceDir   = Join-Path $env:USERPROFILE "\.fonts"
+#   $Source   = Join-Path $env:USERPROFILE "\.fonts"
+#   $Destination = (New-Object -ComObject Shell.Application).Namespace(0x14)
+#   $TempFolder  = "C:\Windows\Temp\Fonts"
+
+# # Create the source directory if it doesn't already exist
+#   New-Item -ItemType Directory -Force -Path $SourceDir
+
+#   New-Item $TempFolder -Type Directory -Force | Out-Null
+
+#   Get-ChildItem -Path $Source -Include '*.ttf','*.ttc','*.otf' -Recurse | ForEach {
+#       If (-not(Test-Path "C:\Windows\Fonts\$($_.Name)")) {
+
+#           $Font = "$TempFolder\$($_.Name)"
+#           
+#           # Copy font to local temporary folder
+#           Copy-Item $($_.FullName) -Destination $TempFolder
+#           
+#           # Install font
+#           $Destination.CopyHere($Font,0x14)
+
+#           # Delete temporary copy of font
+#           Remove-Item $Font -Force -SilentlyContinue
+#       }
+#   }
+
+  echo "Install fonts"
+  $fonts = (New-Object -ComObject Shell.Application).Namespace(0x14)
+  foreach ($file in gci *.ttf)
+  {
+    $fileName = $file.Name
+    if (-not(Test-Path -Path "C:\Windows\fonts\$fileName" ))
+    {
+    echo $fileName
+    dir $file | %{ $fonts.CopyHere($_.fullname) }
+    }
   }
+  sudo cp *.ttf c:\windows\fonts\
 }
+
+# Function to create a new File
+# function touch {
+#   $file = $args[0]
+#   if ($file -eq $null) {
+#     Write-Output "Usage: touch <file>"
+#   } else {
+#     New-Item -ItemType File -Force -Path $file
+#   }
+# }
 
 function weather { curl wttr.in/Lauro_de_Freitas?lang=pt }
 
@@ -162,7 +204,13 @@ function gpom { git push -u origin main }
 function gpo { git push origin }
 function gpl { git pull origin }
 function gd { git diff }
-function gco { git commit -m "$1" }
+function gco ($commit) { 
+  if ($commit -eq $null) {
+    Write-Output "Usage: gco <commit>"
+  } else {
+    git commit -m "$commit"
+  }
+}
 function gca { git commit -am "$1" }
 function gcout { git checkout "$1" }
 function gb { git branch }
