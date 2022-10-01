@@ -94,8 +94,7 @@ function update {
 }
 
 # Function to search things on Google
-function google_it_for_me {
-  $search = $args[0]
+function google_it_for_me ($search) {
   if ($search -eq $null) {
     Write-Output "Usage: google_it_for_me <search>"
   } else {
