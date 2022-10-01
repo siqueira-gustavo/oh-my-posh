@@ -73,9 +73,13 @@ function update {
   sudo npm-windows-upgrade --npm-version latest &&
   Write-Output "`nUpdating Python..."
   # run pip list and check if there is this warning: "WARNING: Ignoring invalid distribution -ip (c:\python310\lib\site-packages)"
-  pip list | Where-Object {$_.Contains("Ignoring invalid distribution -ip (c:\python310\lib\site-packages")}
-  if ($?) { # if there is a warning, then remove all invalid distributions 
+  $list = pip list | Where-Object {$_.Contains("Ignoring invalid distribution -ip (c:\python310\lib\site-packages")}
+  if ($list -ne $null) { # if there is a warning, then remove all invalid distributions 
+    Write-Output "Removing invalid distributions..."
     sudo rm -r 'c:\python310\lib\site-packages\~*'
+    Write-Output "Everything is shiny now!"
+  } else {
+    Write-Output "No invalid distributions found! 😁👍"
   }
   sudo python.exe -m pip install --upgrade pip
   Write-Output "`nUpdating Choco..."
