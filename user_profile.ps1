@@ -71,6 +71,7 @@ function lt { ls -X --tree --config-file $lsd_config }
 function update {
   Write-Output "Updating npm..."
   sudo npm-windows-upgrade --npm-version latest &&
+  ncu -g
   Write-Output "`nUpdating Python..."
   # run pip list and check if there is this warning: "WARNING: Ignoring invalid distribution -ip (c:\python310\lib\site-packages)"
   $list = pip list | Where-Object {$_.Contains("Ignoring invalid distribution -ip (c:\python310\lib\site-packages")}
