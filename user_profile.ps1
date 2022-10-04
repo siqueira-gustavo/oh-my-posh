@@ -72,6 +72,13 @@ function update {
   Write-Output "Updating npm..."
   sudo npm-windows-upgrade --npm-version latest &&
   ncu -g
+  $ncuUpdate = ncu -g | Where-Object {$_.Contains("ncu itself cannot upgrade global packages.")}
+  if ($ncuUpdate -ne $null) {
+    npm -g install npm-check-updates@latest
+    $version = ncu -V
+    Write-Output "npm check updates were updated successfully to version $version"
+  }
+
   Write-Output "`nUpdating Python..."
   # run pip list and check if there is this warning: "WARNING: Ignoring invalid distribution -ip (c:\python310\lib\site-packages)"
   $list = pip list | Where-Object {$_.Contains("Ignoring invalid distribution -ip (c:\python310\lib\site-packages")}
