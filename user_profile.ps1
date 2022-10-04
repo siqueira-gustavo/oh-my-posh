@@ -190,9 +190,9 @@ function openGitHub {
   }
 }
 
-function pwsh-config { cd 'C:\Users\guss_\.config\powershell' }
-function pwsh-code { code 'C:\Users\guss_\.config\powershell' }
-function pwsh-vim { vim 'C:\Users\guss_\.config\powershell' }
+function pwsh-folder { cd 'C:\Users\guss_\.config\powershell' }
+function pwsh-vscode { code 'C:\Users\guss_\.config\powershell' }
+function pwsh-vim { vim 'C:\Users\guss_\.config\powershell\user_profile.ps1' }
 function nvim-config { vim 'C:\Users\guss_\AppData\Local\nvim'}
 function nvim-folder { cd 'C:\Users\guss_\AppData\Local\nvim'}
 function unxutil { cd 'C:\Users\guss_\scoop\apps\unxutils\current\usr\local\wbin\' }
@@ -209,7 +209,14 @@ function abrir { explorer . }
 # git aliases
 function gi { git init }
 function ga { git add . }
-function gr { git restore --staged * }
+function gra { git restore --staged * }
+function gr ($file) {
+  if ($file -eq $null) {
+    Write-Output "Usage: gr <file name>"
+  } else {
+    git restore --staged "$file"
+  }
+}
 function gs { git status }
 function gp { git pull }
 function gpsh { git push }
@@ -217,6 +224,7 @@ function gpom { git push -u origin main }
 function gpo { git push origin }
 function gpl { git pull origin }
 function gd { git diff }
+function glog { git log }
 function gco ($commit) { 
   if ($commit -eq $null) {
     Write-Output "Usage: gco <commit>"
@@ -224,8 +232,20 @@ function gco ($commit) {
     git commit -m "$commit"
   }
 }
-function gca { git commit -am "$1" }
-function gcout { git checkout "$1" }
+function gcout ($file) { 
+  if ($file -eq $null) {
+    Write-Output "Usage: gcout <file name>"
+  } else {
+    git checkout "$file"
+  }
+}
+function gcl ($url) { 
+  if ($url -eq $null) {
+    Write-Output "Usage: gcl <url>"
+  } else {
+    git clone "$url"
+  }
+}
 function gb { git branch }
 function gba { git branch -a }
 function gbD { git branch -D "$1" }
@@ -233,7 +253,6 @@ function gbR { git branch -m "$1" }
 function gbM { git branch -m "$1" "$2" }
 function gbA { git branch -a -D "$1" }
 function gbl { git branch -a | grep -v '\*' | sed 's/^..//' }
-function gcl { git clone "$1" }
 
 # Minha lista de comandos
 function Listar-Atalhos {
