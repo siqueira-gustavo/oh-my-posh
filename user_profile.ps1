@@ -57,15 +57,17 @@ Set-Alias grep 'C:\Program Files\Git\usr\bin\grep.exe'
 Set-Alias wget 'C:\Users\guss_\scoop\apps\wget\current\wget.exe'
 Set-Alias ytscpt 'C:\Users\guss_\scoop\shims\youtube-dl_script.ps1'
 Set-Alias pwd 'C:\Users\guss_\scoop\apps\unxutils\current\usr\local\wbin\pwd.exe'
+Set-Alias mkdir 'C:\Users\guss_\scoop\apps\unxutils\current\usr\local\wbin\mkdir.exe'
+Set-Alias touch 'C:\Users\guss_\scoop\apps\unxutils\current\usr\local\wbin\touch.exe'
 Set-Alias msedge 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
 Set-Alias upd update
 
 # Aliases for lsd (LSDeluxe), inspired by colorls project
 $lsd_config = Join-Path $env:USERPROFILE\.config\powershell "lsd-config.yaml"
-function l { ls -Xl --config-file $lsd_config }
-function la { ls -Xa --config-file $lsd_config }
-function lla { ls -Xla --config-file $lsd_config }
-function lt { ls -X --tree --config-file $lsd_config }
+function l { ls -Xl -v --config-file $lsd_config }
+function la { ls -Xa -v --config-file $lsd_config }
+function lla { ls -Xla -v --config-file $lsd_config }
+function lt { ls -X -v --tree --config-file $lsd_config }
 
 # Utilities
 function update {
