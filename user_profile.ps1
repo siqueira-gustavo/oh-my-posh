@@ -247,7 +247,6 @@ function gcl ($url) {
   }
 }
 function gb { git branch }
-function gba { git branch -a }
 function gbD { git branch -D "$1" }
 function gbR { git branch -m "$1" }
 function gbM { git branch -m "$1" "$2" }
