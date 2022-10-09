@@ -39,6 +39,9 @@ Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory
 # Env
 $env:GIT_SSH = "C:\Windows\system32\OpenSSH\ssh.exe"
 
+# Default browser
+$browser = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+
 # Alias
 Set-Alias eth Get-NetAdapter
 Set-Alias vim nvim
@@ -47,19 +50,19 @@ Set-Alias ogh openGitHub
 Set-Alias lg lazygit
 Set-Alias ls lsd
 Set-Alias ll lla
-Set-Alias ln 'C:\Users\guss_\scoop\apps\psutils\current\ln.ps1'
+Set-Alias ln $env:USERPROFILE\scoop\apps\psutils\current\ln.ps1
 Set-Alias find fd
 Set-Alias sed 'C:\Program Files\Git\usr\bin\sed.exe'
 Set-Alias tig 'C:\Program Files\Git\usr\bin\tig.exe'
 Set-Alias less 'C:\Program Files\Git\usr\bin\less.exe'
 Set-Alias grep 'C:\Program Files\Git\usr\bin\grep.exe'
 # Set-Alias grep findstr
-Set-Alias wget 'C:\Users\guss_\scoop\apps\wget\current\wget.exe'
-Set-Alias ytscpt 'C:\Users\guss_\scoop\shims\youtube-dl_script.ps1'
-Set-Alias pwd 'C:\Users\guss_\scoop\apps\unxutils\current\usr\local\wbin\pwd.exe'
-Set-Alias mkdir 'C:\Users\guss_\scoop\apps\unxutils\current\usr\local\wbin\mkdir.exe'
-Set-Alias touch 'C:\Users\guss_\scoop\apps\unxutils\current\usr\local\wbin\touch.exe'
-Set-Alias msedge 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
+Set-Alias wget $env:USERPROFILE\scoop\apps\wget\current\wget.exe
+Set-Alias ytscpt $env:USERPROFILE\scoop\shims\youtube-dl_script.ps1
+Set-Alias pwd $env:USERPROFILE\scoop\apps\unxutils\current\usr\local\wbin\pwd.exe
+Set-Alias mkdir $env:USERPROFILE\scoop\apps\unxutils\current\usr\local\wbin\mkdir.exe
+Set-Alias touch $env:USERPROFILE\scoop\apps\unxutils\current\usr\local\wbin\touch.exe
+Set-Alias msedge $browser
 Set-Alias upd update
 
 # Aliases for lsd (LSDeluxe), inspired by colorls project
@@ -177,7 +180,6 @@ function which ($command) {
 
 function openGitHub {
   $url = "https://github.com/siqueira-gustavo"
-  $browser = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
   if ($url -eq $null) {
     return
   }
@@ -190,12 +192,12 @@ function openGitHub {
   }
 }
 
-function pwsh-folder { cd 'C:\Users\guss_\.config\powershell' }
-function pwsh-vscode { code 'C:\Users\guss_\.config\powershell' }
-function pwsh-vim { vim 'C:\Users\guss_\.config\powershell\user_profile.ps1' }
-function nvim-config { vim 'C:\Users\guss_\AppData\Local\nvim'}
-function nvim-folder { cd 'C:\Users\guss_\AppData\Local\nvim'}
-function unxutil { cd 'C:\Users\guss_\scoop\apps\unxutils\current\usr\local\wbin\' }
+function pwsh-folder { cd $env:USERPROFILE\.config\powershell }
+function pwsh-vscode { code $env:USERPROFILE\.config\powershell }
+function pwsh-vim { vim $env:USERPROFILE\.config\powershell\user_profile.ps1 }
+function nvim-config { vim $env:USERPROFILE\AppData\Local\nvim}
+function nvim-folder { cd $env:USERPROFILE\AppData\Local\nvim}
+function unxutil { cd $env:USERPROFILE\scoop\apps\unxutils\current\usr\local\wbin\ }
 function docs { cd 'D:\Users\guss_\Documents\' }
 function codar { cd 'D:\Users\guss_\Documents\CODE' }
 function SARP { cd 'D:\Users\guss_\Documents\# SARP' }
