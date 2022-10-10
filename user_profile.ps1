@@ -226,7 +226,7 @@ function gp { git pull }
 function gpsh { git push }
 function gpom ($branch) {
   if ($null -eq $branch) {
-    Write-Output "Usage: gpom <$branch>"
+    Write-Output "Usage: gpom <branch>"
   }
   else {
     git push -u origin $branch
@@ -263,7 +263,7 @@ function gcl ($url) {
 function gb { git branch }
 function gbm ($branch) {
   if ($null -eq $branch) {
-    Write-Output "Usage: gbm <$branch>"
+    Write-Output "Usage: gbm <branch>"
   }
   else {
     git branch -m "$branch"
@@ -279,16 +279,16 @@ function grao ($repo_name) {
   }
 }
 function g1st {
-  Write-Host "Let's create our first commit..." -ForegroundColor Green
-  $commit = Read-Host -Prompt "Enter your commit message" -ForegroundColor Yellow
-  $branch = Read-Host -Prompt "Enter which branch (main, master...?)" -ForegroundColor Yellow
-  $repo_name = Read-Host -Prompt "Enter the name of the repository" -ForegroundColor Yellow
-  ghi           # git init
-  ga            # git add .
-  gco           # git commit "$commit"
-  gbm           # git branch -m "$branch"
-  grao          # git remote add origin git@github.com:siqueira-gustavo/$repo_name.git
-  gpom          # git push -u origin $branch
+  Write-Host "Let's create our first commit..."
+  $commit = Read-Host -Prompt "Enter your commit message"
+  $branch = Read-Host -Prompt "Enter which branch (main, master...?)"
+  $repo_name = Read-Host -Prompt "Enter the name of the repository"
+  ghi             # git init
+  ga              # git add .
+  gco $commit     # git commit "$commit"
+  gbm $branch     # git branch -m "$branch"
+  grao $repo_name # git remote add origin git@github.com:siqueira-gustavo/$repo_name.git
+  gpom $branch    # git push -u origin $branch
 }
 
 # Minha lista de comandos
