@@ -77,8 +77,8 @@ function update {
   Write-Output "Updating npm..."
   sudo npm-windows-upgrade --npm-version latest &&
   ncu -g
-  $ncuUpdate = ncu -g | Where-Object {$_.Contains("ncu itself cannot upgrade global packages.")}
-  if ($ncuUpdate -ne $null) {
+  $ncuUpdate = ncu -g | Where-Object { $_.Contains("ncu itself cannot upgrade global packages.") }
+  if ($null -ne $ncuUpdate) {
     npm -g install npm-check-updates@latest
     $version = ncu -V
     Write-Output "npm check updates were updated successfully to version $version"
@@ -86,12 +86,14 @@ function update {
 
   Write-Output "`nUpdating Python..."
   # run pip list and check if there is this warning: "WARNING: Ignoring invalid distribution -ip (c:\python310\lib\site-packages)"
-  $list = pip list | Where-Object {$_.Contains("Ignoring invalid distribution -ip (c:\python310\lib\site-packages")}
-  if ($list -ne $null) { # if there is a warning, then remove all invalid distributions 
+  $list = pip list | Where-Object { $_.Contains("Ignoring invalid distribution -ip (c:\python310\lib\site-packages") }
+  if ($null -ne $list) {
+    # if there is a warning, then remove all invalid distributions 
     Write-Output "Removing invalid distributions..."
     sudo rm -r 'c:\python310\lib\site-packages\~*'
     Write-Output "Everything is shiny now!"
-  } else {
+  }
+  else {
     Write-Output "No invalid distributions found! 😁👍"
   }
   sudo python.exe -m pip install --upgrade pip
@@ -112,50 +114,49 @@ function update {
 
 # Function to search things on Google
 function google_it_for_me ($search) {
-  if ($search -eq $null) {
+  if ($null -eq $search) {
     Write-Output "Usage: google_it_for_me <search>"
-  } else {
+  }
+  else {
     Write-Output "Searching for '$search' on Google..."
     Start-Process "https://www.google.com/search?q=$search"
   }
 }
 
 function Install-Fonts {
-#   $SourceDir   = Join-Path $env:USERPROFILE "\.fonts"
-#   $Source   = Join-Path $env:USERPROFILE "\.fonts"
-#   $Destination = (New-Object -ComObject Shell.Application).Namespace(0x14)
-#   $TempFolder  = "C:\Windows\Temp\Fonts"
+  #   $SourceDir   = Join-Path $env:USERPROFILE "\.fonts"
+  #   $Source   = Join-Path $env:USERPROFILE "\.fonts"
+  #   $Destination = (New-Object -ComObject Shell.Application).Namespace(0x14)
+  #   $TempFolder  = "C:\Windows\Temp\Fonts"
 
-# # Create the source directory if it doesn't already exist
-#   New-Item -ItemType Directory -Force -Path $SourceDir
+  # # Create the source directory if it doesn't already exist
+  #   New-Item -ItemType Directory -Force -Path $SourceDir
 
-#   New-Item $TempFolder -Type Directory -Force | Out-Null
+  #   New-Item $TempFolder -Type Directory -Force | Out-Null
 
-#   Get-ChildItem -Path $Source -Include '*.ttf','*.ttc','*.otf' -Recurse | ForEach {
-#       If (-not(Test-Path "C:\Windows\Fonts\$($_.Name)")) {
+  #   Get-ChildItem -Path $Source -Include '*.ttf','*.ttc','*.otf' -Recurse | ForEach {
+  #       If (-not(Test-Path "C:\Windows\Fonts\$($_.Name)")) {
 
-#           $Font = "$TempFolder\$($_.Name)"
-#           
-#           # Copy font to local temporary folder
-#           Copy-Item $($_.FullName) -Destination $TempFolder
-#           
-#           # Install font
-#           $Destination.CopyHere($Font,0x14)
+  #           $Font = "$TempFolder\$($_.Name)"
+  #           
+  #           # Copy font to local temporary folder
+  #           Copy-Item $($_.FullName) -Destination $TempFolder
+  #           
+  #           # Install font
+  #           $Destination.CopyHere($Font,0x14)
 
-#           # Delete temporary copy of font
-#           Remove-Item $Font -Force -SilentlyContinue
-#       }
-#   }
+  #           # Delete temporary copy of font
+  #           Remove-Item $Font -Force -SilentlyContinue
+  #       }
+  #   }
 
-  echo "Install fonts"
+  Write-Output "Install fonts"
   $fonts = (New-Object -ComObject Shell.Application).Namespace(0x14)
-  foreach ($file in gci *.ttf)
-  {
+  foreach ($file in Get-ChildItem *.ttf) {
     $fileName = $file.Name
-    if (-not(Test-Path -Path "C:\Windows\fonts\$fileName" ))
-    {
-    echo $fileName
-    dir $file | %{ $fonts.CopyHere($_.fullname) }
+    if (-not(Test-Path -Path "C:\Windows\fonts\$fileName" )) {
+      Write-Output $fileName
+      Get-ChildItem $file | ForEach-Object { $fonts.CopyHere($_.fullname) }
     }
   }
   sudo cp *.ttf c:\windows\fonts\
@@ -193,10 +194,10 @@ function openGitHub {
 }
 
 function pwsh-folder { cd $env:USERPROFILE\.config\powershell }
-function pwsh-vscode { code $env:USERPROFILE\.config\powershell }
+function pwsh-code { code $env:USERPROFILE\.config\powershell\user_profile.ps1 }
 function pwsh-vim { vim $env:USERPROFILE\.config\powershell\user_profile.ps1 }
-function nvim-config { vim $env:USERPROFILE\AppData\Local\nvim}
-function nvim-folder { cd $env:USERPROFILE\AppData\Local\nvim}
+function nvim-config { vim $env:USERPROFILE\AppData\Local\nvim }
+function nvim-folder { cd $env:USERPROFILE\AppData\Local\nvim }
 function unxutil { cd $env:USERPROFILE\scoop\apps\unxutils\current\usr\local\wbin\ }
 function docs { cd 'D:\Users\guss_\Documents\' }
 function codar { cd 'D:\Users\guss_\Documents\CODE' }
@@ -209,51 +210,86 @@ function rast-config { code 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\cor
 function abrir { explorer . }
 
 # git aliases
-function gi { git init }
+function ghi { git init }
 function ga { git add . }
 function gra { git restore --staged * }
 function gr ($file) {
-  if ($file -eq $null) {
+  if ($null -eq $file) {
     Write-Output "Usage: gr <file name>"
-  } else {
+  }
+  else {
     git restore --staged "$file"
   }
 }
 function gs { git status }
 function gp { git pull }
 function gpsh { git push }
-function gpom { git push -u origin main }
+function gpom ($branch) {
+  if ($null -eq $branch) {
+    Write-Output "Usage: gpom <$branch>"
+  }
+  else {
+    git push -u origin $branch
+  }
+}
 function gpo { git push origin }
 function gpl { git pull origin }
 function gd { git diff }
 function glog { git log }
 function gco ($commit) { 
-  if ($commit -eq $null) {
+  if ($null -eq $commit) {
     Write-Output "Usage: gco <commit>"
-  } else {
+  }
+  else {
     git commit -m "$commit"
   }
 }
 function gcout ($file) { 
-  if ($file -eq $null) {
+  if ($null -eq $file) {
     Write-Output "Usage: gcout <file name>"
-  } else {
+  }
+  else {
     git checkout "$file"
   }
 }
 function gcl ($url) { 
-  if ($url -eq $null) {
+  if ($null -eq $url) {
     Write-Output "Usage: gcl <url>"
-  } else {
+  }
+  else {
     git clone "$url"
   }
 }
 function gb { git branch }
-function gbD { git branch -D "$1" }
-function gbR { git branch -m "$1" }
-function gbM { git branch -m "$1" "$2" }
-function gbA { git branch -a -D "$1" }
-function gbl { git branch -a | grep -v '\*' | sed 's/^..//' }
+function gbm ($branch) {
+  if ($null -eq $branch) {
+    Write-Output "Usage: gbm <$branch>"
+  }
+  else {
+    git branch -m "$branch"
+  }
+}
+function gbl { git branch -a | grep -v '\*' | sed 's/^..//' } # Which branch I am
+function grao ($repo_name) {
+  if ($null -eq $repo_name) {
+    Write-Output "Usage: grao <repo_name>"
+  }
+  else {
+    git remote add origin git@github.com:siqueira-gustavo/$repo_name.git
+  }
+}
+function g1st {
+  Write-Host "Let's create our first commit..." -ForegroundColor Green
+  $commit = Read-Host -Prompt "Enter your commit message" -ForegroundColor Yellow
+  $branch = Read-Host -Prompt "Enter which branch (main, master...?)" -ForegroundColor Yellow
+  $repo_name = Read-Host -Prompt "Enter the name of the repository" -ForegroundColor Yellow
+  ghi           # git init
+  ga            # git add .
+  gco           # git commit "$commit"
+  gbm           # git branch -m "$branch"
+  grao          # git remote add origin git@github.com:siqueira-gustavo/$repo_name.git
+  gpom          # git push -u origin $branch
+}
 
 # Minha lista de comandos
 function Listar-Atalhos {
