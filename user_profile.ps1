@@ -64,6 +64,7 @@ Set-Alias mkdir $env:USERPROFILE\scoop\apps\unxutils\current\usr\local\wbin\mkdi
 Set-Alias touch $env:USERPROFILE\scoop\apps\unxutils\current\usr\local\wbin\touch.exe
 Set-Alias msedge $browser
 Set-Alias upd update
+Set-Alias otf openThisFolder
 
 # Aliases for lsd (LSDeluxe), inspired by colorls project
 $lsd_config = Join-Path $env:USERPROFILE\.config\powershell "lsd-config.yaml"
@@ -207,7 +208,7 @@ function jw { cd 'D:\Users\guss_\Documents\# PESSOAIS\Teocráticos' }
 function CVA { code 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\Relatórios SR\CVA' }
 function vCVA { vim 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\Relatórios SR\CVA' }
 function rast-config { code 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\correios_cli' }
-function abrir { explorer . }
+function openThisFolder { explorer . }
 
 # git aliases
 function ghi { git init }
