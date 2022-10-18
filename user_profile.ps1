@@ -101,6 +101,8 @@ function update {
   Write-Output "`nUpdating Choco..."
   sudo choco upgrade all &&
   Write-Output "`nUpdating Scoop..."
+  scoop bucket rm main
+  scoop bucket add main
   scoop update * && scoop cleanup * &&
   Write-Output "`nUpdating Winget..."
   winget upgrade --all && 
@@ -205,6 +207,7 @@ function codar { cd 'D:\Users\guss_\Documents\CODE' }
 function SARP { cd 'D:\Users\guss_\Documents\# SARP' }
 function guga { cd 'D:\Users\guss_\Documents\# PESSOAIS' }
 function jw { cd 'D:\Users\guss_\Documents\# PESSOAIS\Teocráticos' }
+function openCVA { cd 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\Relatórios SR\CVA' }
 function CVA { code 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\Relatórios SR\CVA' }
 function vCVA { vim 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\Relatórios SR\CVA' }
 function rast-config { code 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\correios_cli' }
