@@ -1,19 +1,8 @@
-# Prompt Imports
-Import-Module Terminal-Icons
-Import-Module posh-git
-# Tem um problema com o antivirus do windows que enxerga o binário do FZF como uma ameaça e não permite acesso ao repositório ou instalando via choco ou scoop.
-# Import-Module PSFzf
-
 # Show weather
 curl wttr.in/Lauro_de_Freitas?format="%l:+%c+%t+%m\n"
 # Load Oh My Posh prompt (with custom theme) config file
 $omp_config = Join-Path $env:USERPROFILE\.config\powershell "gugaguga.omp.json"
 oh-my-posh init pwsh --config $omp_config | Invoke-Expression
-
-# Import-Module oh-my-posh
-# O Oh My Posh não suporta mais módulos do PowerShell. Para instalá-lo, terá que usar outra ferramenta.
-# Clique no link abaixo para ver como migrar.
-# https://ohmyposh.dev/docs/migrating
 
 # PSReadLine
 # Autosugestões do PSReadline
@@ -106,12 +95,6 @@ function update {
   scoop update * && scoop cleanup * &&
   Write-Output "`nUpdating Winget..."
   winget upgrade --all && 
-  Write-Output "`nUpdating PowerShell Modules..."
-  Update-Module -Name Terminal-Icons -Force &&
-  Update-Module -Name posh-git -Force &&
-  # Update-Module -Name PSFzf -Force &&
-  Update-Module -Name z -Force &&
-  Update-Module -Name PSReadLine -Force
   refreshenv
 }
 
