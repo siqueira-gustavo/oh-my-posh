@@ -179,6 +179,7 @@ function openGitHub {
   }
 }
 
+function android-emulator { emulator -avd Nexus_5X_API_24 -netdelay none -netspeed full }
 function pwsh-folder { cd $env:USERPROFILE\.config\powershell }
 function pwsh-code { code $env:USERPROFILE\.config\powershell\user_profile.ps1 }
 function pwsh-vim { vim $env:USERPROFILE\.config\powershell\user_profile.ps1 }
