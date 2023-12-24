@@ -1,4 +1,6 @@
+Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
 # Show weather
+# (Invoke-WebRequest wttr.in/Lauro_de_Freitas?format="%l:+%c+%t+%m" -UserAgent "curl" ).Content
 curl wttr.in/Lauro_de_Freitas?format="%l:+%c+%t+%m\n"
 # Load Oh My Posh prompt (with custom theme) config file
 $omp_config = Join-Path $env:USERPROFILE\.config\powershell "gugaguga.omp.json"
@@ -53,22 +55,36 @@ Set-Alias mkdir $env:USERPROFILE\scoop\apps\unxutils\current\usr\local\wbin\mkdi
 Set-Alias touch $env:USERPROFILE\scoop\apps\unxutils\current\usr\local\wbin\touch.exe
 Set-Alias msedge $browser
 Set-Alias upd update
-Set-Alias otf openThisFolder
+Set-Alias open openThisFolder
+Set-Alias gifm google_it_for_me
+Set-Alias bgd bat_git_diff
+Set-Alias bathelp bat_help
 
 # Aliases for lsd (LSDeluxe), inspired by colorls project
 $lsd_config = Join-Path $env:USERPROFILE\.config\powershell "lsd-config.yaml"
-function l { ls -Xl -v --config-file $lsd_config }
-function la { ls -Xa -v --config-file $lsd_config }
-function lla { ls -Xla -v --config-file $lsd_config }
-function lt { ls -X -v --tree --config-file $lsd_config }
+function l
+{ ls -Xl -v --config-file $lsd_config 
+}
+function la
+{ ls -Xa -v --config-file $lsd_config 
+}
+function lla
+{ ls -Xla -v --config-file $lsd_config 
+}
+function lt
+{ ls -X -v --tree --config-file $lsd_config 
+}
 
 # Utilities
-function update {
+function update
+{
   Write-Output "Updating npm..."
   sudo npm-windows-upgrade --npm-version latest &&
+  Write-Output "Updating npm check updates..."
   ncu -g
   $ncuUpdate = ncu -g | Where-Object { $_.Contains("ncu itself cannot upgrade global packages.") }
-  if ($null -ne $ncuUpdate) {
+  if ($null -ne $ncuUpdate)
+  {
     npm -g install npm-check-updates@latest
     $version = ncu -V
     Write-Output "npm check updates were updated successfully to version $version"
@@ -76,14 +92,15 @@ function update {
 
   Write-Output "`nUpdating Python..."
   # run pip list and check if there is this warning: "WARNING: Ignoring invalid distribution -ip (c:\python310\lib\site-packages)"
-  $list = pip list | Where-Object { $_.Contains("Ignoring invalid distribution -ip (c:\python310\lib\site-packages") }
-  if ($null -ne $list) {
+  $list = pip list | Where-Object { $_.Contains("WARNING: Ignoring invalid distribution") }
+  if ($null -ne $list)
+  {
     # if there is a warning, then remove all invalid distributions 
     Write-Output "Removing invalid distributions..."
     sudo rm -r 'c:\python310\lib\site-packages\~*'
     Write-Output "Everything is shiny now!"
-  }
-  else {
+  } else
+  {
     Write-Output "No invalid distributions found! 😁👍"
   }
   sudo python.exe -m pip install --upgrade pip
@@ -92,24 +109,49 @@ function update {
   Write-Output "`nUpdating Scoop..."
   scoop bucket rm main
   scoop bucket add main
-  scoop update * && scoop cleanup * &&
+  scoop update * && scoop cleanup * && scoop cache rm * &&
   Write-Output "`nUpdating Winget..."
-  winget upgrade --all && 
+  winget upgrade --all --include-unknown && 
   refreshenv
 }
 
 # Function to search things on Google
-function google_it_for_me ($search) {
-  if ($null -eq $search) {
+function google_it_for_me
+{
+  $search = Read-Host -Prompt "Enter here what you want to search on Google"
+  if ($null -eq $search)
+  {
     Write-Output "Usage: google_it_for_me <search>"
-  }
-  else {
+  } else
+  {
     Write-Output "Searching for '$search' on Google..."
     Start-Process "https://www.google.com/search?q=$search"
   }
 }
 
-function Install-Fonts {
+function cva-app
+{
+  CVA-folder && node .
+}
+
+function temas_discurso
+{
+  node 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\Relatórios SR\CVA\lab\code\temas_discurso\discurso.js'
+}
+
+function bat_git_diff()
+{
+  git diff --name-only --relative --diff-filter=d | xargs bat --diff
+}
+
+# function bat_help()
+# {
+#   bat --plain --language=help
+#   '$@' --help 2>&1 | bathelp
+# }
+
+function Install-Fonts
+{
   #   $SourceDir   = Join-Path $env:USERPROFILE "\.fonts"
   #   $Source   = Join-Path $env:USERPROFILE "\.fonts"
   #   $Destination = (New-Object -ComObject Shell.Application).Namespace(0x14)
@@ -138,9 +180,11 @@ function Install-Fonts {
 
   Write-Output "Install fonts"
   $fonts = (New-Object -ComObject Shell.Application).Namespace(0x14)
-  foreach ($file in Get-ChildItem *.ttf) {
+  foreach ($file in Get-ChildItem *.ttf)
+  {
     $fileName = $file.Name
-    if (-not(Test-Path -Path "C:\Windows\fonts\$fileName" )) {
+    if (-not(Test-Path -Path "C:\Windows\fonts\$fileName" ))
+    {
       Write-Output $fileName
       Get-ChildItem $file | ForEach-Object { $fonts.CopyHere($_.fullname) }
     }
@@ -158,115 +202,308 @@ function Install-Fonts {
 #   }
 # }
 
-function weather { curl wttr.in/Lauro_de_Freitas?lang=pt }
-
-function which ($command) {
-  Get-Command -Name $command -ErrorAction SilentlyContinue |
-  Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue
+function weather
+{ curl wttr.in/Lauro_de_Freitas?lang=pt 
 }
 
-function openGitHub {
+function which ($command)
+{
+  Get-Command -Name $command -ErrorAction SilentlyContinue |
+    Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue
+}
+
+function openGitHub
+{
   $url = "https://github.com/siqueira-gustavo"
-  if ($url -eq $null) {
+  if ($url -eq $null)
+  {
     return
   }
   # Open URL in default browser
-  if ($browser) {
+  if ($browser)
+  {
     Start-Process -FilePath $browser -ArgumentList $url
-  }
-  else {
+  } else
+  {
     Start-Process -FilePath "chrome" -ArgumentList $url
   }
 }
 
-function android-emulator { emulator -avd Nexus_5X_API_24 -netdelay none -netspeed full }
-function pwsh-folder { cd $env:USERPROFILE\.config\powershell }
-function pwsh-code { code $env:USERPROFILE\.config\powershell\user_profile.ps1 }
-function pwsh-vim { vim $env:USERPROFILE\.config\powershell\user_profile.ps1 }
-function nvim-config { vim $env:USERPROFILE\AppData\Local\nvim }
-function nvim-folder { cd $env:USERPROFILE\AppData\Local\nvim }
-function unxutil { cd $env:USERPROFILE\scoop\apps\unxutils\current\usr\local\wbin\ }
-function docs { cd 'D:\Users\guss_\Documents\' }
-function codar { cd 'D:\Users\guss_\Documents\CODE' }
-function SARP { cd 'D:\Users\guss_\Documents\# SARP' }
-function guga { cd 'D:\Users\guss_\Documents\# PESSOAIS' }
-function jw { cd 'D:\Users\guss_\Documents\# PESSOAIS\Teocráticos' }
-function openCVA { cd 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\Relatórios SR\CVA' }
-function CVA { code 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\Relatórios SR\CVA' }
-function vCVA { vim 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\Relatórios SR\CVA' }
-function rast-config { code 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\correios_cli' }
-function openThisFolder { explorer . }
+function android-emulator
+{ 
+  Write-Host "Select your device:`n1. Pixel 4 API 30`n2. Nexus 5X API 24`n3. Exit`n"
+  $option = Read-Host -Prompt "Your device"
+  if ($option -eq "1")
+  {
+    return emulator -avd Pixel_4_API_30 -netdelay none -netspeed full -no-cache
+  } if ($option -eq "2")
+  {
+    return emulator -avd Nexus_5X_API_24 -netdelay none -netspeed full -no-cache
+  } if ($option -eq "3")
+  {
+    return Write-Host "See you later! 😁"
+  } else
+  {
+    Write-Host "Invalid option. Try it again!`n"
+    android-emulator
+  }
+}
+function pwsh-folder
+{ cd $env:USERPROFILE\.config\powershell 
+}
+function pwsh-code
+{ code $env:USERPROFILE\.config\powershell\user_profile.ps1 
+}
+function pwsh-vim
+{ vim $env:USERPROFILE\.config\powershell\user_profile.ps1 
+}
+function nvim-config
+{ vim $env:USERPROFILE\AppData\Local\nvim 
+}
+function nvim-folder
+{ cd $env:USERPROFILE\AppData\Local\nvim 
+}
+function unxutil
+{ cd $env:USERPROFILE\scoop\apps\unxutils\current\usr\local\wbin\ 
+}
+function docs
+{ cd 'D:\Users\guss_\Documents\' 
+}
+function codar
+{ cd 'D:\Users\guss_\Documents\CODE' 
+}
+function SARP
+{ cd 'D:\Users\guss_\Documents\# SARP' 
+}
+function guga
+{ cd 'D:\Users\guss_\Documents\# PESSOAIS' 
+}
+function jw
+{ cd 'D:\Users\guss_\Documents\# PESSOAIS\Teocráticos' 
+}
+function CVA-folder
+{ cd 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\Relatórios SR\CVA' 
+}
+function CVA
+{ code 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\Relatórios SR\CVA' 
+}
+function vCVA
+{ vim 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\Relatórios SR\CVA' 
+}
+function rast-config
+{ code 'D:\Users\guss_\Documents\CODE\PESSOAIS\Projects\correios_cli' 
+}
+function openThisFolder
+{ explorer . 
+}
+
+function Set-PathVariable
+{
+  <#
+  .SYNOPSIS
+    Modify the PATH environment variable.
+  .DESCRIPTION
+    Set-PathVariable allows you to add or remove paths to your PATH variable at the specified scope with logic that prevents duplicates.
+  .PARAMETER AddPath
+    A path that you wish to add. Can be specified with or without a trailing slash.
+  .PARAMETER RemovePath
+    A path that you wish to remove. Can be specified with or without a trailing slash.
+  .PARAMETER Scope
+    The scope of the variable to edit. Either Process, User, or Machine.
+    If you specify Machine, you must be running as administrator.
+  .EXAMPLE
+    Set-PathVariable -AddPath C:\tmp\bin -RemovePath C:\path\java
+    This will add the C:\tmp\bin path and remove the C:\path\java path. The Scope will be set to Process, which is the default.
+  .NOTES
+    Author: ThePoShWolf
+    Modified by: Gustavo Siqueira and ChatGPT 😅
+  .LINK
+    Website: https://www.techtarget.com/searchitoperations/answer/Manage-the-Windows-PATH-environment-variable-with-PowerShell
+    Github: https://github.com/ThePoShWolf
+  #>
+  param (
+    [string]$AddPath,
+    [string]$RemovePath,
+    [ValidateSet('Process', 'User', 'Machine')]
+    [string]$Scope = 'Process'
+  )
+  $regexPaths = @()
+  if ($PSBoundParameters.ContainsKey('AddPath'))
+  {
+    $regexPaths += [regex]::Escape($AddPath)
+    Write-Output "Adding path: $AddPath"
+  }
+
+  if ($PSBoundParameters.ContainsKey('RemovePath'))
+  {
+    $regexPaths += [regex]::Escape($RemovePath)
+    Write-Output "Removing path: $RemovePath"
+  }
+    
+  $arrPath = [System.Environment]::GetEnvironmentVariable('PATH', $Scope) -split ';'
+  foreach ($path in $regexPaths)
+  {
+    $arrPath = $arrPath | Where-Object { $_ -notMatch "^$path\\?" }
+  }
+    
+  if (!$arrPath.Contains($AddPath))
+  {
+    $arrPath = $arrPath + $AddPath
+  }
+    
+  $value = $arrPath -join ';'
+  [System.Environment]::SetEnvironmentVariable('PATH', $value, $Scope)
+  if ($PSBoundParameters.ContainsKey('AddPath'))
+  {
+    Write-Output "Path: $AddPath added to scope: $Scope"
+  } elseif ($PSBoundParameters.ContainsKey('RemovePath'))
+  {
+    Write-Output "Path: $RemovePath removed from scope: $Scope"
+  } else
+  {
+    Write-Output "Path: $value added to scope: $Scope"
+  }
+}
+
+function Get-PathVariable
+{
+  <#
+    .SYNOPSIS
+    Retrieves the PATH environment variable based on the specified scope.
+
+    .DESCRIPTION
+    The `Get-PathVariable` function retrieves the value of the PATH environment variable based on the specified scope. The `Scope` parameter determines whether the variable is retrieved from the Process, User, or Machine scope.
+
+    .PARAMETER Scope
+    Specifies the scope from which to retrieve the PATH environment variable. Valid values are 'Process', 'User', or 'Machine'. The default value is 'Process'.
+
+    .EXAMPLE
+    Get-PathVariable -Scope 'User'
+    Retrieves the PATH environment variable from the User scope.
+
+    .EXAMPLE
+    Get-PathVariable -Scope 'Machine'
+    Retrieves the PATH environment variable from the Machine scope.
+    #>
+
+  param (
+    [ValidateSet('Process', 'User', 'Machine')]
+    [ValidateNotNullOrEmpty()]
+    [string]$Scope = 'Process'
+  )
+  $path = [System.Environment]::GetEnvironmentVariable('PATH', $Scope) -split ';' | Sort-Object
+  return $path
+}
 
 # git aliases
-function ghi { git init }
-function ga { git add . }
-function gra { git restore --staged * }
-function gr ($file) {
-  if ($null -eq $file) {
+function ghi
+{ git init 
+}
+function ga
+{ git add . 
+}
+function gra
+{ git restore --staged * 
+}
+function gr ($file)
+{
+  if ($null -eq $file)
+  {
     Write-Output "Usage: gr <file name>"
-  }
-  else {
+  } else
+  {
     git restore --staged "$file"
   }
 }
-function gs { git status }
-function gp { git pull }
-function gpsh { git push }
-function gpom ($branch) {
-  if ($null -eq $branch) {
+function gs
+{ git status 
+}
+function gp
+{ git pull 
+}
+function gpsh
+{ git push 
+}
+function gpom ($branch)
+{
+  if ($null -eq $branch)
+  {
     Write-Output "Usage: gpom <branch>"
-  }
-  else {
+  } else
+  {
     git push -u origin $branch
   }
 }
-function gpo { git push origin }
-function gpl { git pull origin }
-function gd { git diff }
-function glog { git log }
-function gco ($commit) { 
-  if ($null -eq $commit) {
+function gpo
+{ git push origin 
+}
+function gpull ($branch)
+{ git pull origin $branch
+}
+function gd
+{ git diff 
+}
+function glog
+{ git log 
+}
+function gco ($commit)
+{ 
+  if ($null -eq $commit)
+  {
     Write-Output "Usage: gco <commit>"
-  }
-  else {
+  } else
+  {
     git commit -m "$commit"
   }
 }
-function gcout ($file) { 
-  if ($null -eq $file) {
+function gcout ($file)
+{ 
+  if ($null -eq $file)
+  {
     Write-Output "Usage: gcout <file name>"
-  }
-  else {
+  } else
+  {
     git checkout "$file"
   }
 }
-function gcl ($url) { 
-  if ($null -eq $url) {
+function gcln ($url)
+{ 
+  if ($null -eq $url)
+  {
     Write-Output "Usage: gcl <url>"
-  }
-  else {
+  } else
+  {
     git clone "$url"
   }
 }
-function gb { git branch }
-function gbm ($branch) {
-  if ($null -eq $branch) {
+function gb
+{ git branch 
+}
+function gbm ($branch)
+{
+  if ($null -eq $branch)
+  {
     Write-Output "Usage: gbm <branch>"
-  }
-  else {
+  } else
+  {
     git branch -m "$branch"
   }
 }
-function gbl { git branch -a | grep -v '\*' | sed 's/^..//' } # Which branch I am
-function grao ($repo_name) {
-  if ($null -eq $repo_name) {
+function git-pwd
+{ git branch -a | grep -v '\*' | sed 's/^..//' 
+} # Which branch I am
+function grao ($repo_name)
+{
+  if ($null -eq $repo_name)
+  {
     Write-Output "Usage: grao <repo_name>"
-  }
-  else {
+  } else
+  {
     git remote add origin git@github.com:siqueira-gustavo/$repo_name.git
   }
 }
-function g1st {
+function g1st
+{
   Write-Host "Let's create our first commit..."
   $commit = Read-Host -Prompt "Enter your commit message"
   $branch = Read-Host -Prompt "Enter which branch (main, master...?)"
@@ -280,7 +517,8 @@ function g1st {
 }
 
 # Minha lista de comandos
-function Listar-Atalhos {
+function Listar-Atalhos
+{
   Write-Output "----------------------------------------"
   Write-Output "Atalhos Customizados"
   Write-Output "----------------------------------------"
@@ -492,3 +730,13 @@ function Listar-Atalhos {
 #     [Microsoft.PowerShell.PSConsoleReadLine]::Insert("$($key.KeyChar)")
 #   }
 # }
+
+Register-ArgumentCompleter -CommandName z -ScriptBlock {
+  param($commandName, $parameterName, $wordToComplete) 
+  Search-NavigationHistory $commandName -List | ForEach-Object{ $_.Path} | ForEach-Object {
+    New-Object -Type System.Management.Automation.CompletionResult -ArgumentList $_,
+		  $_,
+		  "ParameterValue",
+		  $_
+  }
+}
